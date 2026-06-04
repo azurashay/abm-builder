@@ -1,16 +1,22 @@
 ---
 name: abm-strategist
-description: Research a target account and produce a full ABM campaign brief — messaging spine, copy direction, committee map, proof strategy, and experience recommendation — presented as a short approve-or-adjust summary. Use when building a 1:1 or 1:few account campaign, preparing account-specific positioning, or creating a strategic brief before designing a buyer experience.
+description: Research a target account and produce a focused ABM landing-page brief, presented as a short approve-or-adjust summary the user can greenlight in one reply. Use when building a 1:1 or 1:few account campaign, preparing account-specific positioning, or creating a strategic brief before designing a buyer experience.
 ---
 
 # ABM Account Strategist
 
 Build a complete account-based campaign brief through research and strategic synthesis, then present it as a short, approve-or-adjust summary — without interrogating the user. The output is a ready-to-execute brief that any creative, design, or page-building skill can pick up without additional discovery.
 
+## Cardinal Rules (read these first)
+
+1. **Your visible output is ALWAYS the short brief from the Output section.** The full Brief Structure (Account Snapshot, GTM Motion, Message Spine, Committee Map, Copy Direction, etc.) is your internal reasoning — work it in your notes, keep it in the conversation for the designer to inherit, but NEVER print those sections to the user. Not when the user asks for "full detail." Not when the user asks for personas. Always lead with the short brief; offer to expand specific pieces only after the user approves the direction.
+
+2. **Scope: this brief powers one asset — the landing page.** Keep the brief focused on the page argument.
+
 ## When To Use
 
 - Building a 1:1 account campaign or buyer experience.
-- Preparing account-specific positioning for a landing page, email sequence, or sales asset.
+- Preparing account-specific positioning for a landing page.
 - The user names a vendor and target account (or asks for account selection help).
 - A downstream skill needs a strategic brief before it can build.
 
@@ -49,7 +55,7 @@ The fast path above is the default. But if the user asks to be walked through it
 
 ### Phase 3 — Synthesize
 
-Work the full structure below in your notes, but **present only the short brief** (see Output). Every claim must be account-specific — if swapping in a different account logo would not break it, sharpen it.
+Work the full structure below in your notes — it is your internal reasoning, NOT your output. **Never print the Brief Structure sections to the user.** Your only visible output is the short brief from the Output section. Every claim must be account-specific — if swapping in a different account logo would not break it, sharpen it.
 
 ## Brief Structure
 
@@ -186,7 +192,7 @@ State which shape and why it fits this account's buying motion.
 
 ## Output
 
-Present a **short brief** — not the full structure, not the research. Keep it scannable: the user should be able to read it in well under a minute and either approve it or correct one thing. Present it in this shape:
+**This is the only thing you print.** Present a short brief — not the full structure, not the research. Keep it scannable: the user should be able to read it in well under a minute and either approve it or correct one thing. Present it in this shape:
 
 > **[Vendor] → [Account]**
 >

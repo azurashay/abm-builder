@@ -1,6 +1,6 @@
 ---
 name: abm-page-designer
-description: "Build Awwwards-level buyer experiences from an ABM campaign brief. Creates a single self-contained HTML page with cinematic scroll interactions, vendor-faithful design, and heavy micro-interactions — then deploys through Folloze MCP. Activates when: a campaign-brief.json exists, the user says 'build the page', 'design the experience', 'create the landing page', or references the abm-strategist output. Also activates on: 'push to Folloze', 'save to Folloze MCP', 'update the board', or any Folloze deployment request for an ABM page."
+description: "Build Awwwards-level buyer experiences from an ABM campaign brief. Creates a single self-contained HTML page with cinematic scroll interactions, vendor-faithful design, and heavy micro-interactions — then deploys through Folloze MCP. Activates when: an abm-strategist brief exists in the conversation, the user says 'build the page', 'design the experience', 'create the landing page', or references the abm-strategist output. Also activates on: 'push to Folloze', 'save to Folloze MCP', 'update the board', or any Folloze deployment request for an ABM page."
 ---
 
 # ABM Page Designer
@@ -15,9 +15,9 @@ The page must feel like the vendor built it — not like an AI generated it, not
 
 Read the campaign brief before doing anything:
 
-1. Look for the brief in conversation context (produced by the `abm-strategist` skill earlier in this session). If running in Claude Code or Codex, also check for `campaign-brief.json` in the working directory.
-2. If no brief exists, ask the user: run the `abm-strategist` skill first, or provide the brief manually.
-3. Extract: account context, vendor positioning, message spine, audience mode, buying committee, copy direction, proof strategy, section arc, and experience shape recommendation.
+1. Take the brief from the conversation — the `abm-strategist` skill produced it earlier in this session (its full strategy, plus any adjustments the user approved). Read it directly from the conversation; there is no file to load.
+2. If no brief exists in the conversation, ask the user to run the `abm-strategist` skill first, or to provide the brief manually.
+3. Work from: account context, vendor positioning, message spine, audience mode, buying committee, copy direction, proof strategy, section arc, and experience shape recommendation.
 
 The brief is your creative constraint. Do not re-research the account or rewrite the messaging. Build what the strategist defined.
 
@@ -63,12 +63,12 @@ Before writing any CSS, determine the source site's color mode:
 
 **NEVER use base64 encoded images.** Always `<img src="https://...">` with real URLs.
 
-Harvest aggressively from the vendor's site. Do not settle for 2–3 images:
+Harvest thoroughly from the vendor's site so you have a deep library to compose from — then use as many or as few as the vendor's own visual density calls for:
 
 - Scan multiple pages: `/`, `/product`, `/customers`, `/about`, `/resources`, `/blog`. Each page has different visuals.
 - Try every source: `og:image`, `twitter:image`, CDN domains in the HTML (sanity.io, ctfassets.net, cloudinary, imgix, etc.), `<img>` tags, CSS `background-image` URLs.
 - Pull: product screenshots, hero visuals, illustrations, dashboard shots, customer logos, background textures, abstract graphics, team photos.
-- **Goal: 15+ real visual elements per page.** If you have fewer, go back and harvest more before building.
+- **Match image density to the vendor's brand.** An image-rich vendor (lots of product shots, dashboards, photography) warrants a visually dense page — gather generously and use it. A minimal, editorial, or type-led vendor warrants restraint — a few strong, well-placed visuals beat filling space. Let the source site's own density decide, the same way its colors and fonts do. Never pad a clean brand with images to hit a number, and never starve an image-rich one.
 
 Use images as backgrounds, not just inline:
 - Section backgrounds: real product shots or brand graphics as `background-image` with overlay gradient for text contrast. This is what makes a page feel premium.
@@ -388,7 +388,7 @@ Run before presenting to the user and again before MCP save.
 
 ### Design
 - [ ] Color mode matches source site (light = light, dark = dark)
-- [ ] 15+ real visual elements from the vendor's site
+- [ ] Image density matches the vendor's brand (dense for image-rich vendors, restrained for minimal ones) — no padding, no starving
 - [ ] All images via URL — zero base64
 - [ ] All icons are inline SVG — no emoji, no icon fonts
 - [ ] At least 2 different layout patterns (no repeated grids)

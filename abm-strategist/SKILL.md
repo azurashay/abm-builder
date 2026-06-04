@@ -1,11 +1,11 @@
 ---
 name: abm-strategist
-description: Research a target account, interview the user, and produce a full ABM campaign brief — messaging spine, copy direction, committee map, proof strategy, and experience recommendation. Use when building a 1:1 or 1:few account campaign, preparing account-specific positioning, or creating a strategic brief before designing a buyer experience.
+description: Research a target account and produce a full ABM campaign brief — messaging spine, copy direction, committee map, proof strategy, and experience recommendation — presented as a short approve-or-adjust summary. Use when building a 1:1 or 1:few account campaign, preparing account-specific positioning, or creating a strategic brief before designing a buyer experience.
 ---
 
 # ABM Account Strategist
 
-Build a complete account-based campaign brief through research, structured interviews, and strategic synthesis. The output is a ready-to-execute brief that any creative, design, or page-building skill can pick up without additional discovery.
+Build a complete account-based campaign brief through research and strategic synthesis, then present it as a short, approve-or-adjust summary — without interrogating the user. The output is a ready-to-execute brief that any creative, design, or page-building skill can pick up without additional discovery.
 
 ## When To Use
 
@@ -16,32 +16,40 @@ Build a complete account-based campaign brief through research, structured inter
 
 ## Process
 
-### Phase 1 — Account Discovery
+**Do not interview the user.** Do not open with a list of discovery questions. Research the account, infer what the evidence supports, make any remaining judgment calls explicit as assumptions, and present a tight brief the user can approve or adjust in a single reply. The only acceptable up-front question is one disambiguation when the account itself is genuinely ambiguous (e.g. two companies share a name) — never a batch of strategy questions.
 
-Research the target account and vendor before asking the user anything:
+### Phase 1 — Research
 
-- Vendor positioning: visit the vendor's public website. Capture product categories, value propositions, customer proof, competitive framing, and primary CTA language.
-- Target account context: find the account's scale, industry, operating model, geography, public initiatives, leadership priorities, technology stack signals, and recent news.
-- Competitive landscape: identify the likely incumbent or alternative the account uses today in the vendor's category.
-- Public proof: look for existing vendor–account relationships, case studies, mutual customers, analyst mentions, or industry awards.
+Research the vendor and target account well enough to make a confident, account-specific case — and stop there. Gather the evidence that actually shapes the page:
 
-Present a short discovery summary to the user before moving to interviews. If the user did not name a target account, recommend 2–3 credible accounts with a one-line rationale for each and let them pick.
+- Vendor positioning: product category, core value proposition, primary CTA language, strongest public proof.
+- Target account: scale, industry, operating model, and the public signals that matter most for this vendor's category — the priorities, pressures, incumbent, or recent moves that give the page a reason to exist.
+- Relationship signal: any existing vendor–account relationship, mutual customers, or case study.
 
-### Phase 2 — Structured Interview
+Pursue the threads that change the argument; once the evidence is strong enough to build a specific, defensible case, further digging does not improve the brief. Do not present the raw research or narrate the search process — it stays in your working notes. If the user did not name a target account, recommend 2–3 credible accounts with a one-line rationale each and let them pick before going deep.
 
-Ask the user focused questions to fill gaps that public research cannot cover. Group questions into batches of 3–5 so the user is not overwhelmed. Prioritize:
+### Phase 2 — Infer, don't ask
 
-1. **Motion and intent** — What triggered this campaign? Is there a renewal, expansion, competitive displacement, or new-logo play? What is the timeline?
-2. **Stakeholders and committee** — Who are the key buyers? What functions need to believe the story? Is there an internal champion?
-3. **Pain and priority** — What is broken, slow, risky, or expensive for the account today? What business outcome matters most to the economic buyer?
-4. **Proof and credibility** — What customer stories, data points, or product capabilities should anchor the case? Are there approved metrics or claims?
-5. **Constraints** — Brand guidelines, tone, language, content the user already has, things to avoid, compliance limits.
+From the research, settle the two decisions that most shape the page and **state each as an explicit assumption** in the brief, so the user can correct it in one reply instead of answering a questionnaire:
 
-Do not ask questions that public research already answered. Do not ask more than two rounds of questions unless the account is genuinely complex.
+- **GTM motion** — new-logo / renewal / expansion / competitive-displacement. Infer from the relationship signal: an existing customer points to renewal or expansion; no relationship points to new-logo.
+- **Audience mode** — default to **buyer-facing** unless the request clearly calls for seller-enablement.
 
-### Phase 3 — Strategic Synthesis
+For pains, proof, committee, and constraints, rely on the research and sensible defaults. Never hold up the brief for something you can reasonably infer. If the user already supplied context (CRM notes, constraints, a source page), fold it in without asking them to repeat it.
 
-Build the full brief. Every section must be specific to this account — if swapping in a different account logo would not break the section, sharpen it.
+### Guided pass (optional, on request)
+
+The fast path above is the default. But if the user asks to be walked through it — "guided", "step by step", "walk me through it" — or if they want to center the page on a **specific persona, product, or angle** they have in mind, switch to a short guided pass instead of inferring silently. Keep it to **two or three questions, asked one at a time**, and only the ones that actually change the output:
+
+1. **Motion** — confirm new-logo / renewal / expansion / displacement, if it is not already obvious.
+2. **Focus** — is there a specific persona, product line, or angle to center the page on? (Optional — skip if the account makes it obvious.)
+3. **Proof and constraints** — any approved metrics, customer stories, or wording to avoid?
+
+**Mind the order.** When a guided answer changes *what to research* (a chosen persona or product), do light account research first so your questions are informed, ask the focusing question, then run the focused research on the chosen angle before writing the brief. Never research a persona or angle in depth before the user has picked it.
+
+### Phase 3 — Synthesize
+
+Work the full structure below in your notes, but **present only the short brief** (see Output). Every claim must be account-specific — if swapping in a different account logo would not break it, sharpen it.
 
 ## Brief Structure
 
@@ -82,9 +90,8 @@ If this spine is generic, fix it before moving on.
 
 Decide and document:
 
-- **Buyer-facing**: clean, public, no internal mechanics visible. Translate intent data and internal signals into public-market problems and useful next steps. Never expose browsing behavior, known-contact counts, sales-rep notes, or internal scoring.
+- **Buyer-facing** (the default): clean, public, no internal mechanics visible. Translate intent data and internal signals into public-market problems and useful next steps. Never expose browsing behavior, known-contact counts, sales-rep notes, or internal scoring.
 - **Seller-enablement**: internal-facing, intent data can appear when it improves the story. Every number needs interpretation and a recommended action.
-- **Mixed**: buyer-facing primary with a seller-enablement companion.
 
 For buyer-facing mode: use private notes (CRM, meeting notes, intent platforms) to understand the motion, not to write the copy. Visible claims come from public vendor messaging, public account evidence, or user-approved language.
 
@@ -132,6 +139,7 @@ Only include functions relevant to this specific deal. Each gets a distinct reas
 - Use crisp, commercial language. Prefer `reduce faculty switching risk` over `drive a transformative learning experience`.
 - Make the buyer feel recognized, not watched.
 - One strong sentence beats three explanatory ones.
+- In any copy meant for the page itself (headlines, candidate lines), use a hyphen ("-"), never an em dash ("—"), so the wording carries straight into the build without rework.
 
 #### Patterns To Use
 
@@ -178,84 +186,34 @@ State which shape and why it fits this account's buying motion.
 
 ## Output
 
-Present the complete brief to the user for review. If running in an environment with file access (Claude Code, Codex), also save it as `campaign-brief.json` in the working directory. The brief follows this structure:
+Present a **short brief** — not the full structure, not the research. Keep it scannable: the user should be able to read it in well under a minute and either approve it or correct one thing. Present it in this shape:
 
-```json
-{
-  "account": {
-    "name": "",
-    "industry": "",
-    "scale": "",
-    "geography": "",
-    "operating_model": "",
-    "tech_stack": "",
-    "public_priorities": [],
-    "relationship_status": ""
-  },
-  "vendor": {
-    "name": "",
-    "positioning": "",
-    "key_differentiators": [],
-    "proof_assets": []
-  },
-  "motion": {
-    "type": "one-to-one | one-to-few | one-to-many | industry-vertical",
-    "trigger": "",
-    "timeline": "",
-    "rationale": ""
-  },
-  "message_spine": {
-    "account_context": "",
-    "buyer_priority": "",
-    "why_change": "",
-    "why_now": "",
-    "vendor_promise": "",
-    "proof_summary": "",
-    "next_action": ""
-  },
-  "audience_mode": "buyer-facing | seller-enablement | mixed",
-  "buying_committee": [
-    {
-      "function": "",
-      "care_about": "",
-      "key_message": "",
-      "proof_needed": ""
-    }
-  ],
-  "proof_strategy": [
-    {
-      "fact": "",
-      "implication": "",
-      "action": ""
-    }
-  ],
-  "copy_direction": {
-    "tone": "",
-    "headline_candidates": [],
-    "section_arc": [],
-    "patterns_to_use": [],
-    "avoid": []
-  },
-  "experience_shape": {
-    "recommended": "",
-    "rationale": ""
-  },
-  "constraints": {
-    "brand_guidelines": "",
-    "must_include": [],
-    "must_avoid": [],
-    "approved_assets": []
-  }
-}
-```
+> **[Vendor] → [Account]**
+>
+> **Account:** one line — scale, what they do, relationship to the vendor.
+>
+> **The argument:** one or two sentences — why this account should change, and why now. This is the spine of the page.
+>
+> **Assumptions** (correct any in one reply):
+> - Motion: *[new-logo / renewal / expansion / displacement]*
+> - Audience: *[buyer-facing / seller-enablement]*
+>
+> **Proof we'll lead with:**
+> - three strongest, account-specific proof points
+>
+> **Recommended page angle:** the experience shape, in a phrase, and one line on why it fits.
+>
+> Approve to build · adjust anything — a pain to emphasize, proof to include, constraints, wording to avoid · or say "walk me through it" for a guided pass.
 
-Also present the brief to the user in a readable format for review before handoff. The user must approve the brief before a downstream skill picks it up.
+Hold the full brief — every section under Brief Structure above — in your working notes so the design step inherits complete strategy. The short summary is what you show; the full reasoning stays in the conversation, where the design step reads it directly. You do not need to write it to a file.
+
+The user approves or adjusts the short brief before the page gets built. If they add or correct something, fold it into the working brief and confirm the adjustment — no need to re-present the whole thing.
 
 ## Handoff
 
-When the brief is approved, tell the user:
+When the user approves, tell them:
 
-> Brief is ready. You can now ask me to design and build the page — I will use the `abm-page-designer` skill to create the buyer experience from this brief.
+> Brief is ready. Say "build" and I'll design and deploy the page from it.
 
 Do not attempt to build, design, or deploy anything. That is the next skill's job.
 

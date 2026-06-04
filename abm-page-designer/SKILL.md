@@ -78,7 +78,9 @@ Use images as backgrounds, not just inline:
 
 Always add a gradient overlay over background images so text stays readable. Verify contrast.
 
-**Cannot find real images? Stop and ask the user.** No stock photos. No placeholders. No generic illustrations.
+**Harvesting is mandatory, not optional.** Do not skip this step and build a page out of pure CSS/SVG. A page with zero real harvested images fails QA, no matter how polished the layout looks. If the first page you fetch is thin, scan the other pages listed above before giving up.
+
+**Cannot find real images? Stop and ask the user.** No stock photos. No placeholders. No generic illustrations. And never fabricate a product screenshot, dashboard, or chart in HTML/CSS as a substitute — harvest the real one or ask the user for it.
 
 ### Icons
 
@@ -226,12 +228,14 @@ Do NOT follow a fixed section template. Derive the page structure from the brief
 
 If the same layout pattern appears twice in a page, swap one for something structurally different.
 
-**Visual richness — the page must have visual moments, not just styled text:**
+**Visual richness — the page MUST contain real harvested images, not just styled text:**
 
-- At least one section must be LED by a visual element (product screenshot, hero image, data visualization, animated graphic) — not text with an icon beside it.
-- Harvested images from the vendor's site are design tools: use them at scale (full-width, half-section, overlapping containers) — not as small thumbnails in cards.
-- If the vendor is image-rich, the page must feel image-rich. If the vendor is type-led, let typography be the visual. Either way, avoid the trap of "text blocks with colored backgrounds and icons" for every section.
-- Icons supplement content; they never substitute for real visual elements.
+- **Real images from the vendor's site are mandatory.** The page must use actual images harvested from the vendor (see Image Harvesting) — product screenshots, photography, illustrations, hero visuals, brand graphics — referenced by URL.
+- **Synthetic HTML/CSS mockups do NOT count as images.** Building a fake "dashboard", "data table", "chart", or "product UI" out of `<div>`s, CSS, and inline SVG is NOT a visual — it is more styled text. These do not satisfy the image requirement and usually look invented. If you want to show product UI, harvest a real screenshot from the vendor's site; do not fabricate one.
+- At least one full section must be LED by a real harvested image (full-width, half-section, or as a section background) — not text with an icon beside it.
+- Use harvested images at scale: full-width bands, half-section splits, overlapping containers, section backgrounds with gradient overlay — not as small thumbnails in cards.
+- If the vendor is image-rich (lots of photography, product shots, illustrations like most modern brands), the page MUST feel image-rich — multiple real images across multiple sections. If the vendor is genuinely minimal/type-led, fewer images is fine, but there must still be at least one or two real ones.
+- Icons supplement content; they never substitute for real images.
 
 **Hero — lead with an idea, not a layout:**
 
@@ -426,7 +430,9 @@ Run before presenting to the user and again before MCP save.
 
 ### Design
 - [ ] Color mode matches source site (light = light, dark = dark)
-- [ ] Image density matches the vendor's brand (dense for image-rich vendors, restrained for minimal ones) — no padding, no starving
+- [ ] **HARD FAIL if zero real harvested images.** The page must contain real images harvested from the vendor's site, referenced by URL. Synthetic HTML/CSS mockups (fake dashboards, tables, charts, product UI built from divs/SVG) do NOT count. If the page has none, go back and harvest, or stop and ask the user.
+- [ ] At least one full section is LED by a real harvested image (not text-plus-icon)
+- [ ] Image density matches the vendor's brand (dense for image-rich vendors, restrained for minimal ones) — but never zero
 - [ ] All images via URL — zero base64
 - [ ] All icons are inline SVG — no emoji, no icon fonts
 - [ ] At least 2 different layout patterns (no repeated grids)

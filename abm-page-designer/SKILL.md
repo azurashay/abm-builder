@@ -185,6 +185,15 @@ Based on the vendor's brand DNA and the brief's experience shape, commit to a di
 
 Name the direction in your working notes. Every subsequent design decision must reinforce it.
 
+**Brand personality goes beyond tokens.** Colors and fonts are the minimum. Also capture the vendor's visual personality and let it shape layout choices:
+
+- **Playful brands** (characters, illustrations, rounded shapes, bright colors): use organic shapes, generous border-radius, illustration-forward layouts, lighter visual weight. Don't flatten a fun brand into a corporate grid.
+- **Enterprise/authoritative brands** (sharp edges, dark modes, data-forward): use angular compositions, tight grids, stat-heavy sections, precision spacing.
+- **Editorial/minimal brands** (whitespace, type-led, restrained color): let typography carry the page. Fewer images, bigger type, more negative space. Don't pad a minimal brand with decorative elements.
+- **Visual/media-rich brands** (photography, product shots, video-forward): images lead. Use full-bleed photography, overlapping visuals, image-as-section-background patterns. Text supports the visuals.
+
+If the generated page could belong to any vendor after swapping the logo and colors, the brand personality is missing. The layout choices, spacing rhythm, and visual weight must feel native to THIS vendor.
+
 ### Step 2 — Compose, Don't Assemble
 
 Do NOT follow a fixed section template. Derive the page structure from the brief's narrative arc and the vendor's visual personality. Every page is different because every brand, account, and story is different.
@@ -202,6 +211,28 @@ Do NOT follow a fixed section template. Derive the page structure from the brief
 - **Scroll as rhythm.** Alternate dense and sparse, fast and slow, tension and release. A uniformly dense page exhausts; a uniformly sparse one bores. The contrast between sections IS the craft.
 - **No two adjacent sections should use the same layout.** If one section is a 3-column grid, the next should be a full-width statement, an asymmetric split, a timeline, or a single oversized visual — anything but another 3-column grid.
 
+**Layout vocabulary — draw from at least 4 of these per page:**
+
+- Full-width statement (single headline or stat, massive type, maximum whitespace)
+- Asymmetric split (60/40 or 70/30, not 50/50 — image bleeds one edge)
+- Staggered grid (items at different vertical offsets, not aligned in a row)
+- Timeline or stepped flow (vertical or horizontal progression)
+- Overlapping layers (cards or images breaking out of their container, z-depth)
+- Large media + caption (one image or product shot dominates, text is secondary)
+- Bento/mosaic (different-sized tiles, not uniform cards)
+- Pull quote or stat hero (one number or quote fills the viewport)
+- Tabbed or toggled content (different views in the same footprint)
+- Scrolling comparison (before/after, side-by-side with scroll-linked reveal)
+
+If the same layout pattern appears twice in a page, swap one for something structurally different.
+
+**Visual richness — the page must have visual moments, not just styled text:**
+
+- At least one section must be LED by a visual element (product screenshot, hero image, data visualization, animated graphic) — not text with an icon beside it.
+- Harvested images from the vendor's site are design tools: use them at scale (full-width, half-section, overlapping containers) — not as small thumbnails in cards.
+- If the vendor is image-rich, the page must feel image-rich. If the vendor is type-led, let typography be the visual. Either way, avoid the trap of "text blocks with colored backgrounds and icons" for every section.
+- Icons supplement content; they never substitute for real visual elements.
+
 **Hero — lead with an idea, not a layout:**
 
 - **Do NOT default to split-screen** (copy left, image right). That is the #1 tell of a templated page.
@@ -215,7 +246,14 @@ Do NOT follow a fixed section template. Derive the page structure from the brief
 
 **One signature moment per page:**
 
-Every page needs ONE interactive element that makes the visitor pause: an ROI calculator, persona/role tabs, before/after comparison slider, animated chart, tabbed feature explorer, comparison table, or interactive timeline. ONE per page — more than one and they compete. Choose the one that fits THIS vendor's story best.
+Every page needs ONE interactive element that makes the visitor pause — and it must be visually prominent, not tucked into a subsection. It should occupy a meaningful portion of the viewport and feel like the centerpiece of the page. Examples: an ROI calculator, persona/role tabs with distinct visual states, before/after comparison slider, animated data visualization, tabbed feature explorer with real product imagery, or interactive timeline. ONE per page — more than one and they compete. Choose the one that fits THIS vendor's story best, and give it the space and visual weight it deserves.
+
+**Stats are visual anchors, not table cells.** When the brief provides strong numbers, treat them as design moments:
+
+- Give the primary stat its own breathing room — it can be the entire focal point of a section.
+- Use the display font at hero-level size (3-5rem+) for the number itself. Support with a short label underneath in body-size type.
+- If multiple stats appear together, create clear hierarchy: one dominant, others supporting at smaller scale. Never line up 3-4 stats in identical boxes at the same size — that kills their individual impact.
+- Count-up animation on scroll gives stats a moment of arrival.
 
 **Premium through restraint:**
 

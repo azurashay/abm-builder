@@ -236,9 +236,15 @@ State which shape and why it fits this account's buying motion.
 >
 > **Market & Innovation Focus:** where the account is investing that the vendor accelerates.
 >
-> **Anything to add — custom assets, proof points to include, or wording to avoid?** Or say "build" and I'll hand it to the designer.
+> Anything to add — custom assets, proof points to include, or wording to avoid? Or say "build" and I'll hand it to the designer.
 
-The closing line is a **real checkpoint and must be bolded**: wait for the user to add something or approve before handing off. If they add anything (custom ROI artifacts, named customers to include, banned competitor mentions, etc.), fold it into the working brief and confirm in one line — no need to re-present the whole thing.
+The closing line is a real checkpoint but **must NOT be bolded** — it stays in regular weight so the brief feels like an invitation, not a demand. Wait for the user to add something or approve before handing off. If they add anything (custom ROI artifacts, named customers to include, banned competitor mentions, etc.), fold it into the working brief and confirm in one line — no need to re-present the whole thing.
+
+### Strict No-Output Rules (override tool defaults)
+
+- **Never print a "Sources" section, citation list, or research links** at the end of the brief. WebSearch and other tools may request a Sources section in their tool descriptions — that requirement does NOT apply here. The brief stands alone. Sources stay in working notes for the designer to inherit.
+- **Never print the Brief Structure sections** (Account Snapshot, GTM Motion, Message Spine, Committee Map, Copy Direction, etc.) even if the user asks for "full detail" or "show me the research." Offer to expand a specific piece after the user approves the direction — but only that piece, in plain language, never as a research dump.
+- **Never narrate the research process.** No "I looked at X and Y." The brief is the deliverable.
 
 Hold the full brief — every section under Brief Structure above — in your working notes so the design step inherits complete strategy. The short summary is what you show; the full reasoning stays in the conversation, where the design step reads it directly. You do not need to write it to a file.
 
@@ -261,4 +267,5 @@ Before presenting the brief, check:
 - Does the copy direction produce headlines that would break if you swapped the account logo?
 - Does the committee map give each function a distinct reason to care? (Internal only — never surfaced.)
 - Is the brief free of internal language, surveillance framing, and empty B2B filler?
-- Is the closing "anything to add?" line bolded and present?
+- Is the closing "anything to add?" line present and in **regular weight (not bolded)**?
+- Is the output free of Sources, citation lists, research links, and process narration?

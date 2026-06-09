@@ -443,19 +443,22 @@ No dead buttons. No `href="#"`. No `javascript:void(0)`. Every visible control p
 
    > Created `<filename>.html` *(+lines added)*
    >
-   > The page is now visible in the preview panel. Here's what I built:
+   > The page is now visible in the preview panel. Here's the story I built, section by section:
    >
-   > - **Hero** — [one-line description: what's in it, headline angle, CTA]
-   > - **<Section 2 name>** — [one-line description]
-   > - **<Section 3 name>** — [one-line description]
+   > - **Hero** — [1-1.5 lines: the IDEA the section opens with — the angle, the tension, the promise. Tell the story, not the UI.]
+   > - **<Section 2 name>** — [1-1.5 lines: the idea this section delivers next in the narrative arc.]
+   > - **<Section 3 name>** — [1-1.5 lines]
    > - ... *(one bullet per section, in scroll order)*
-   > - **Sticky header** — [nav structure, smooth-scroll]
    >
    > Everything uses [Folloze theme | vendor brand tokens] and includes event tracking on all CTAs and nav links. Take a look in the preview — once you're happy, I'll save it as a Folloze board.
 
    Rules for the summary:
-   - **Bold the section name**, then a single-line description after the em-dash separator.
+   - **Bold the section name**, then a 1-1.5 line description after the em-dash separator.
+   - **Tell the story / idea, not the UI.** Describe what the section ARGUES, what tension it sets up, what proof it lands, what next step it earns — not what shapes/colors/grids are on screen.
+     - ❌ Wrong: *"Hero — bold gradient banner with tournament dates, key stats (48 teams), and CTAs"* (this describes UI)
+     - ✅ Right: *"Hero — sets the scale of 2026: 48 teams across 3 nations, one 30-day window that resets the global appetite for football. Frames why this edition is different."* (this tells the story)
    - List sections in scroll order. Do not skip any.
+   - Skip mentioning structural elements (sticky header, nav, footer) unless they carry narrative weight.
    - Mention which theme/tokens were used (Folloze theme vs vendor brand).
    - End with the "ready to save?" checkpoint. **Wait for the user to approve before calling the MCP save tool.**
 3. Save with `save_folloze_board_from_file` (preferred) or `save_folloze_board_from_html`.

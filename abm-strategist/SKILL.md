@@ -34,18 +34,38 @@ The order is: **quick intake → research (only as needed) → short brief → o
 
 ### Step 0 — Gap check (ask only what's missing, then wait)
 
-Before any research, read the prompt and decide which of these are already answered and which are open. Ask — in one short message — ONLY the open ones, then **wait for the reply** before any web search or page fetch.
+Before any research, read the prompt and decide which of these are already answered and which are open. Ask — in **one** `AskUserQuestion` tool call — ONLY the open ones, then **wait for the reply** before any web search or page fetch.
 
-Questions must be **short, direct, and bolded** in the visible message — no examples, no preamble, no "I can also do X." One line per open gap.
+**Always use the `AskUserQuestion` tool** for the gap check — never ask in plain inline text. The tool renders a clean interactive selector ("Other" is always available for free-text input, so the user can still type a custom answer like an account name). Pack the open questions (up to 4) into a single `AskUserQuestion` call so the user answers them in one screen.
 
-1. **Research** — did the user ask you to research, or say they already have the context? If not answered, ask:
-   > **Want me to research the account, or do you have the context?**
-2. **Existing material** — did they provide a URL, file, or notes? If not, ask:
-   > **Do you have any material to feed in — a link or file?**
-3. **Target account** — named? If not, ask:
-   > **Which account are we targeting?** (or offer to recommend 2-3)
+Open questions and their schema:
 
-If all three are already answered in the prompt, skip the questions entirely and move on — do not ask for the sake of asking. Never ask about persona, buying role, or "who we're speaking to" — that is inferred silently in Phase 2.
+1. **Research** — did the user ask you to research, or say they already have the context? If not answered, include:
+   ```
+   question: "Want me to research the account, or do you have the context?"
+   header: "Research"
+   options:
+     - { label: "Yes — research it", description: "I'll run targeted searches on the vendor and account" }
+     - { label: "I have the context", description: "Skip research, work from what I tell you" }
+   ```
+2. **Existing material** — did they provide a URL, file, or notes? If not, include:
+   ```
+   question: "Do you have any material to feed in?"
+   header: "Material"
+   options:
+     - { label: "Yes — I'll upload", description: "PDF, doc, URL, or notes" }
+     - { label: "No, start fresh", description: "Begin from public sources only" }
+   ```
+3. **Target account** — named? If not, include:
+   ```
+   question: "Which account are we targeting?"
+   header: "Account"
+   options:
+     - { label: "I'll name it", description: "Type the company name in 'Other'" }
+     - { label: "Recommend 2-3 candidates", description: "Suggest accounts that fit this vendor" }
+   ```
+
+If all three are already answered in the prompt, **do not call the tool** — skip the gap check entirely and move on. Never ask about persona, buying role, or "who we're speaking to" — that is inferred silently in Phase 2. Never ask in plain text when `AskUserQuestion` is available.
 
 Then branch:
 

@@ -226,7 +226,7 @@ State which shape and why it fits this account's buying motion.
 
 ## Output
 
-**This is the only thing you print.** Present a short brief — not the full structure, not the research. Keep it scannable: the user should be able to read it in well under a minute and either approve it or correct one thing. Present it in this shape:
+**This is the only thing you print.** Present a short brief — not the full structure, not the research. Keep it scannable: the user should be able to read it in well under a minute and either approve it or correct one thing. Present it in this exact shape — the brief lives inside a blockquote, and the closing question is **outside** the blockquote in regular body color so it stands out as a real prompt:
 
 > **[Vendor] → [Account]**
 >
@@ -235,10 +235,14 @@ State which shape and why it fits this account's buying motion.
 > **Strategic Operational Challenges:** 1-2 operational pressures the vendor's offering addresses.
 >
 > **Market & Innovation Focus:** where the account is investing that the vendor accelerates.
->
-> Anything to add — custom assets, proof points to include, or wording to avoid? Or say "build" and I'll hand it to the designer.
 
-The closing line is a real checkpoint but **must NOT be bolded** — it stays in regular weight so the brief feels like an invitation, not a demand. Wait for the user to add something or approve before handing off. If they add anything (custom ROI artifacts, named customers to include, banned competitor mentions, etc.), fold it into the working brief and confirm in one line — no need to re-present the whole thing.
+**Anything to add — custom assets, proof points to include, or wording to avoid?** Or say "build" and I'll hand it to the designer.
+
+The closing line is the real checkpoint:
+
+- **MUST be bolded** (the question itself), in regular body text color (black), and placed **outside the blockquote**.
+- Never put the closing line inside the blockquote — that makes it render in muted grey and feel less like an active prompt.
+- Wait for the user to add something or approve before handing off. If they add anything (custom ROI artifacts, named customers to include, banned competitor mentions, etc.), fold it into the working brief and confirm in one line — no need to re-present the whole thing.
 
 ### Strict No-Output Rules (override tool defaults)
 
@@ -267,5 +271,5 @@ Before presenting the brief, check:
 - Does the copy direction produce headlines that would break if you swapped the account logo?
 - Does the committee map give each function a distinct reason to care? (Internal only — never surfaced.)
 - Is the brief free of internal language, surveillance framing, and empty B2B filler?
-- Is the closing "anything to add?" line present and in **regular weight (not bolded)**?
+- Is the closing "anything to add?" line present, **bolded**, in body-text color, and placed **outside** the blockquote (not inside it)?
 - Is the output free of Sources, citation lists, research links, and process narration?

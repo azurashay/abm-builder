@@ -116,11 +116,16 @@ Always add a gradient overlay over background images so text stays readable. Ver
 
 ### Social Proof Sourcing
 
-- First: look for customer logos, quotes, case studies, and stats on the vendor's source URL. Use them.
-- If the source has a logo wall or carousel: include it. Pull logo URLs from their site. Verify they load.
-- If no proof on the source: search for the vendor's known customers. Only include companies you are confident are real customers (public case studies, press releases, "customers" page).
-- If not confident: skip the logo bar. Use a single strong stat or quote instead. One real proof point beats ten invented ones.
-- Never invent customer logos, customers, awards, or proof points.
+**Verified-only rule:** every customer name, logo, quote, stat, award, and case study must come from one of three sources — the marketer's material (the brief, PDF, URL, or notes they uploaded), the vendor's own public pages, or a verifiable third-party (analyst, press release, public case study). **Nothing else is allowed on the page.** If you cannot name the source, it does not appear.
+
+Order of priority:
+
+1. **The marketer's material first.** If the brief lists customers, quotes, or stats to include — use them as-is. Do not paraphrase quotes.
+2. **The vendor's source URL second.** Logos, quotes, case studies, and stats on the vendor's site are fair game.
+3. **Verifiable third-party last.** Only when (1) and (2) fall short, and only if you can cite a public source.
+4. **Stop if (1)-(3) fall short.** Drop the proof element. Use a single strong stat or quote instead. One real proof point beats ten invented ones.
+
+Never invent customer logos, customers, awards, quotes, or proof points. Never fabricate a stat ("40% improvement") that you cannot cite back to a verified source. A page caught with a fake proof point loses credibility on every other claim.
 
 ### Logo Verification (loads ≠ correct)
 
@@ -129,8 +134,11 @@ A logo that loads is not a verified logo. CDN URLs harvested from a page (e.g. `
 - **Target account logo and named customer logos**: source by name from a name-verified location — Wikimedia Commons via `https://commons.wikimedia.org/wiki/Special:FilePath/<Company>_logo.svg` (redirects to the real asset, no hash guessing), or the company's own domain. This guarantees the file IS that company.
 - **Confirm two things separately**: (1) the logo renders (`naturalWidth > 0`), and (2) it is the correct company (name-verified source, or you visually inspected the rendered asset). A harvested hash-named SVG satisfies neither on its own.
 - **Do not trust a harvested mapping for a buyer-facing named logo.** Showing the wrong company's logo to the target account is a credibility-killer. If you cannot name-verify a customer logo, drop it — a smaller wall of correct logos beats a larger wall with one wrong mark.
+- **If the marketer provided a logo URL or asset in the brief, use that.** Their named asset overrides any harvest. Do not "improve" on it.
 - **Dead ends to know**: the Clearbit logo API (`logo.clearbit.com/<domain>`) is deprecated and fails. Wikimedia `Special:FilePath` is reliable and avoids guessing CDN hash paths.
 - **Color fit**: check the logo's fill against its background. White-fill logos vanish on light backgrounds; dark logos vanish on dark. Grayscale-with-color-on-hover treatment works for full-color logos.
+
+**Verification gate (HARD FAIL):** if any named logo or named customer appears on the page without a name-verified source, the page does not ship. Drop the element before saving to MCP.
 
 ## Design Philosophy
 
@@ -431,7 +439,25 @@ No dead buttons. No `href="#"`. No `javascript:void(0)`. Every visible control p
 ### Save Flow
 
 1. Build the HTML file locally. QA it.
-2. Present to the user for review. Do not save to MCP until they approve.
+2. **Present the page to the user with a structured section-by-section summary.** Do not save to MCP until they approve. Use this exact shape:
+
+   > Created `<filename>.html` *(+lines added)*
+   >
+   > The page is now visible in the preview panel. Here's what I built:
+   >
+   > - **Hero** — [one-line description: what's in it, headline angle, CTA]
+   > - **<Section 2 name>** — [one-line description]
+   > - **<Section 3 name>** — [one-line description]
+   > - ... *(one bullet per section, in scroll order)*
+   > - **Sticky header** — [nav structure, smooth-scroll]
+   >
+   > Everything uses [Folloze theme | vendor brand tokens] and includes event tracking on all CTAs and nav links. Take a look in the preview — once you're happy, I'll save it as a Folloze board.
+
+   Rules for the summary:
+   - **Bold the section name**, then a single-line description after the em-dash separator.
+   - List sections in scroll order. Do not skip any.
+   - Mention which theme/tokens were used (Folloze theme vs vendor brand).
+   - End with the "ready to save?" checkpoint. **Wait for the user to approve before calling the MCP save tool.**
 3. Save with `save_folloze_board_from_file` (preferred) or `save_folloze_board_from_html`.
 4. Pass existing `boardId` when updating. Do not create duplicates.
 5. Return the exact MCP-returned URL. Do not invent deployment URLs.

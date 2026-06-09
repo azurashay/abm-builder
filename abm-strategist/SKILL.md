@@ -246,7 +246,7 @@ State which shape and why it fits this account's buying motion.
 
 ## Output
 
-**This is the only thing you print.** Present a short brief — not the full structure, not the research. Keep it scannable: the user should be able to read it in well under a minute and either approve it or correct one thing. Present it in this exact shape — the brief lives inside a blockquote, and the closing question is **outside** the blockquote in regular body color so it stands out as a real prompt:
+**This is the only thing you print.** Present a short brief — not the full structure, not the research. Keep it scannable: the user should be able to read it in well under a minute and either approve it or correct one thing. The brief lives inside a blockquote and ends with the 3 axes — no inline "anything to add?" text. The checkpoint comes immediately after as an `AskUserQuestion` popup:
 
 > **[Vendor] → [Account]**
 >
@@ -256,13 +256,26 @@ State which shape and why it fits this account's buying motion.
 >
 > **Market & Innovation Focus:** where the account is investing that the vendor accelerates.
 
-**Anything to add — custom assets, proof points to include, or wording to avoid?** Or say "build" and I'll hand it to the designer.
+Immediately after rendering the brief, call `AskUserQuestion` with this exact shape:
 
-The closing line is the real checkpoint:
+```
+question: "Approve the brief, or add something?"
+header: "Brief checkpoint"
+multiSelect: false
+options:
+  - { label: "Build it", description: "Looks good — hand off to the designer" }
+  - { label: "Add custom assets", description: "ROI artifact, video, document" }
+  - { label: "Adjust wording or tone", description: "Banned language, framing, competitor mentions" }
+```
 
-- **MUST be bolded** (the question itself), in regular body text color (black), and placed **outside the blockquote**.
-- Never put the closing line inside the blockquote — that makes it render in muted grey and feel less like an active prompt.
-- Wait for the user to add something or approve before handing off. If they add anything (custom ROI artifacts, named customers to include, banned competitor mentions, etc.), fold it into the working brief and confirm in one line — no need to re-present the whole thing.
+("Other" is always available for free-text — the user can type any addition or correction there.)
+
+Checkpoint rules:
+
+- **Never print an inline "anything to add?" text question** — the popup IS the checkpoint. Inline text and the popup together feel duplicative.
+- **Build it** → hand off straight to the designer with no further dialogue.
+- Any other choice (or "Other" with free text) → fold the addition into the working brief and confirm in one line — no need to re-present the whole brief.
+- If the user already approved in the same message that triggered the brief, skip the popup.
 
 ### Strict No-Output Rules (override tool defaults)
 
@@ -291,5 +304,5 @@ Before presenting the brief, check:
 - Does the copy direction produce headlines that would break if you swapped the account logo?
 - Does the committee map give each function a distinct reason to care? (Internal only — never surfaced.)
 - Is the brief free of internal language, surveillance framing, and empty B2B filler?
-- Is the closing "anything to add?" line present, **bolded**, in body-text color, and placed **outside** the blockquote (not inside it)?
+- Is the brief followed by an `AskUserQuestion` popup as the checkpoint (NOT an inline "anything to add?" text line)?
 - Is the output free of Sources, citation lists, research links, and process narration?

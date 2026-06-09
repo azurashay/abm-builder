@@ -224,15 +224,6 @@ Name the direction in your working notes alongside the source evidence (one or t
 
 If the generated page could belong to any vendor after swapping the logo and colors, the brand personality is missing. The layout choices, spacing rhythm, and visual weight must feel native to THIS vendor.
 
-**Brand personality goes beyond tokens.** Colors and fonts are the minimum. Also capture the vendor's visual personality and let it shape layout choices:
-
-- **Playful brands** (characters, illustrations, rounded shapes, bright colors): use organic shapes, generous border-radius, illustration-forward layouts, lighter visual weight. Don't flatten a fun brand into a corporate grid.
-- **Enterprise/authoritative brands** (sharp edges, dark modes, data-forward): use angular compositions, tight grids, stat-heavy sections, precision spacing.
-- **Editorial/minimal brands** (whitespace, type-led, restrained color): let typography carry the page. Fewer images, bigger type, more negative space. Don't pad a minimal brand with decorative elements.
-- **Visual/media-rich brands** (photography, product shots, video-forward): images lead. Use full-bleed photography, overlapping visuals, image-as-section-background patterns. Text supports the visuals.
-
-If the generated page could belong to any vendor after swapping the logo and colors, the brand personality is missing. The layout choices, spacing rhythm, and visual weight must feel native to THIS vendor.
-
 ### Step 2 — Compose, Don't Assemble
 
 Do NOT follow a fixed section template. Derive the page structure from the brief's narrative arc and the vendor's visual personality. Every page is different because every brand, account, and story is different.

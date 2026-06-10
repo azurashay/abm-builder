@@ -15,6 +15,15 @@ Build a focused account-based landing-page brief. Start with a quick intake (off
    - **Never ask about persona, buying role, function, or "who we're targeting."** The buying committee is inferred silently from research — never surfaced as a question. The brief addresses the committee as a whole.
    - Never run deep-research, workflows, or multi-agent research regardless of the answers.
 
+   **Direction parsing — apply these heuristics BEFORE deciding what's "answered":**
+   - **"for [X]"** in the prompt → X is the **TARGET** (in marketing parlance, you build a campaign FOR an audience). Example: *"create abm 1:1 for folloze"* → Folloze is the TARGET, not the vendor.
+   - **URL pointing to a product catalog, shop, or marketing page** (e.g., `hp.com/shop/desktops`, `vendor.com/products/...`) → the URL's domain is the **VENDOR**. Product/catalog URLs are vendor identification, not target material.
+   - **URL pointing to a corporate "About" / news / landing page** → ambiguous; do not infer direction from it.
+   - **"X selling to Y"** / **"[Vendor] → [Target]"** in explicit form → X=vendor, Y=target.
+   - **Only one entity named, no URL** → that entity is the TARGET (the vendor is the user's own context).
+
+   **Direction confirmation gate (safety net):** if your inference of who's vendor vs target relies on more than ONE heuristic, OR if any heuristic feels uncertain, include a **Direction** question in the popup as the FIRST question. Show your current interpretation and let the user confirm or swap. This is cheap insurance against a brief built in the wrong direction — which is unrecoverable downstream.
+
 2. **Your visible output is ALWAYS the short brief from the Output section.** The full Brief Structure (Account Snapshot, GTM Motion, Message Spine, Committee Map, Copy Direction, etc.) is your internal reasoning — work it in your notes, keep it in the conversation for the designer to inherit, but NEVER print those sections to the user. Not when the user asks for "full detail." Always lead with the short brief; offer to expand specific pieces only after the user approves the direction.
 
 3. **Scope: this brief powers one asset — the landing page.** Keep the brief focused on the page argument.
@@ -57,6 +66,16 @@ Before any research, read the prompt and decide which of these are already answe
 **Before the popup, say one warm sentence** in the chat — something like "Let me lock 2-3 things before I dive in" or "Quick scope before I start". Then call `AskUserQuestion`.
 
 **Order of questions (skip any that the prompt already answers):**
+
+0. **Direction (conditional)** — only include if direction is ambiguous per the heuristics in Cardinal Rule #1. If included, this is the FIRST question, before Vendor/Target. Show your current inference so the user confirms or swaps:
+   ```
+   question: "Got the direction right?"
+   header: "Direction"
+   options:
+     - { label: "Yes — [Vendor] selling to [Target]", description: "Confirm: [Vendor] is the seller, [Target] is the account being pitched" }
+     - { label: "No — swap them", description: "[Target] is actually the seller; [Vendor] is the account being pitched" }
+   ```
+   Replace `[Vendor]` and `[Target]` with the names you inferred. **Skip this question if direction is unambiguous** (e.g., the prompt explicitly says "X selling to Y" or only one entity is named).
 
 1. **Vendor** — is the vendor explicitly named? If not, include:
    ```

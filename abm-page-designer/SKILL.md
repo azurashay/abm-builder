@@ -506,30 +506,13 @@ No dead buttons. No `href="#"`. No `javascript:void(0)`. Every visible control p
 ### Save Flow
 
 1. Build the HTML file locally. QA it.
-2. **Present the page to the user with a structured section-by-section summary.** Do not save to MCP until they approve. Use this exact shape:
+2. **Present a short post-build status.** No section-by-section summary — the structure was already approved in the Structure Preview before build. Just a short status line + save popup. Write something like:
 
-   > Created `<filename>.html` *(+lines added)*
+   > Done — page is in the preview panel. Take a look.
    >
-   > The page is now visible in the preview panel. Here's the story I built, section by section:
-   >
-   > - **Hero** — [1-1.5 lines: the IDEA the section opens with — the angle, the tension, the promise. Tell the story, not the UI.]
-   > - **<Section 2 name>** — [1-1.5 lines: the idea this section delivers next in the narrative arc.]
-   > - **<Section 3 name>** — [1-1.5 lines]
-   > - ... *(one bullet per section, in scroll order)*
-   >
-   > Everything uses [Folloze theme | vendor brand tokens] and includes event tracking on all CTAs and nav links.
+   > `<filename>.html` (+lines added) · [Folloze theme | vendor brand] · event tracking on all CTAs
 
-   Rules for the summary:
-   - **Bold the section name**, then a 1-1.5 line description after the em-dash separator.
-   - **Tell the story / idea, not the UI.** Describe what the section ARGUES, what tension it sets up, what proof it lands, what next step it earns — not what shapes/colors/grids are on screen.
-     - ❌ Wrong: *"Hero — bold gradient banner with tournament dates, key stats (48 teams), and CTAs"* (this describes UI)
-     - ✅ Right: *"Hero — sets the scale of 2026: 48 teams across 3 nations, one 30-day window that resets the global appetite for football. Frames why this edition is different."* (this tells the story)
-   - List sections in scroll order. Do not skip any.
-   - Skip mentioning structural elements (sticky header, nav, footer) unless they carry narrative weight.
-   - Mention which theme/tokens were used (Folloze theme vs vendor brand).
-   - **No inline "ready to save?" text question.** The save checkpoint is the `AskUserQuestion` popup in step 2b.
-
-2b. **Immediately after rendering the summary, call `AskUserQuestion`** for the save checkpoint. Write one warm sentence first ("Take a look — ready to ship, or want to tweak something?"), then use this shape:
+   Then immediately call `AskUserQuestion` for the save checkpoint. Write one warm sentence first ("Ready to ship, or want to tweak something?"), then use this shape:
 
    ```
    question: "Ready to save?"
@@ -544,7 +527,7 @@ No dead buttons. No `href="#"`. No `javascript:void(0)`. Every visible control p
    ("Other" is always available for free-text — the user can describe any change.)
 
    - **Ship it** → proceed to step 3 (call the MCP save tool).
-   - **Tweak a section** / **Change the theme** / **Other** → make the change, regenerate the page, re-render the summary, and call `AskUserQuestion` again. Loop until shipped.
+   - **Tweak a section** / **Change the theme** / **Other** → make the change, regenerate the page, and call `AskUserQuestion` again. Loop until shipped.
 3. Save with `save_folloze_board_from_file` (preferred) or `save_folloze_board_from_html`.
 4. Pass existing `boardId` when updating. Do not create duplicates.
 5. Return the exact MCP-returned URL. Do not invent deployment URLs.

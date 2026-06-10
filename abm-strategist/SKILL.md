@@ -96,6 +96,13 @@ Research the vendor and target account well enough to make a confident, account-
 
 **Do NOT use deep-research, workflows, or multi-agent research.** Do your own web searches and page fetches directly — a few targeted queries, not a sweep. Aim for 3-5 web searches and 3-5 page fetches total. That is enough to build a specific, defensible brief. More research does not improve the output; it burns tokens and time.
 
+**When to use web search vs prior knowledge:**
+
+- **Use web search** for market trends, recent moves (last 12 months), industry benchmarks, specific stats, executive quotes, partnerships, M&A, leadership changes, and any non-obvious or strategic claim about the account.
+- **Use prior knowledge** only for stable, widely-accepted facts (industry definitions, general category landscape, well-known taxonomy).
+- **When in doubt, search.** A 10-second search beats a wrong claim that survives into the brief.
+- **Prefer sources from the last 12 months.** Year-old positioning may be obsolete; recent leadership statements and earnings calls beat archived press releases.
+
 Gather the evidence that actually shapes the page. Account-level research runs on three axes — keep them distinct in your notes:
 
 - **Business Priorities** — what the company has publicly declared as priority (annual strategy, stated goals, financial focus, public commitments from leadership).
@@ -267,11 +274,13 @@ State which shape and why it fits this account's buying motion.
 
 > **[Vendor] → [Account]**
 >
-> **Business Priorities:** 1-2 declared priorities the page will speak to.
+> **Business Priorities:** the sharpest insight about what's forcing their hand — not a list of stated goals. *Page implication:* how this should shape the opening of the page.
 >
-> **Strategic Operational Challenges:** 1-2 operational pressures the vendor's offering addresses.
+> **Strategic Operational Challenges:** the specific friction — not a generic "scale" or "transformation" label. *Page implication:* what proof or argument this earns on the page.
 >
-> **Market & Innovation Focus:** where the account is investing that the vendor accelerates.
+> **Market & Innovation Focus:** the bet they're making, framed as the buyer's belief — not a tech-stack description. *Page implication:* what next-step or wedge this opens for the vendor.
+
+Each axis = **one insight sentence + one Page implication sentence**. Lead with the insight, end with the actionable implication. Keep each pair under 2 sentences total — the brief stays scannable.
 
 Immediately after rendering the brief, call `AskUserQuestion` with this exact shape:
 
@@ -316,6 +325,8 @@ Before presenting the brief, check:
 
 - Does every section name the specific account, not a generic placeholder?
 - Are the three account axes (Business Priorities, Strategic Operational Challenges, Market & Innovation Focus) each backed by a real source?
+- Are the three axes **distinct and non-overlapping**? (If "Business Priorities" and "Market & Innovation Focus" say roughly the same thing, sharpen one or both.)
+- Does each axis lead with an **insight** (not a description) and end with a clear **Page implication**?
 - Does the message spine have a clear "why change" and "why now" that could not apply to any other account?
 - Does the proof strategy use only verified, sourced, or user-approved claims? **Zero invented customers, quotes, or stats.**
 - Does the copy direction produce headlines that would break if you swapped the account logo?

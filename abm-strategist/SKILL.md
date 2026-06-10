@@ -274,13 +274,20 @@ State which shape and why it fits this account's buying motion.
 
 > **[Vendor] → [Account]**
 >
-> **Business Priorities:** the sharpest insight about what's forcing their hand — not a list of stated goals. *Page implication:* how this should shape the opening of the page.
+> **Campaign Hook:** the one-line strategic argument — what we are saying to this account and why it lands now. This is the campaign's tagline, the thesis the 3 axes below support.
 >
-> **Strategic Operational Challenges:** the specific friction — not a generic "scale" or "transformation" label. *Page implication:* what proof or argument this earns on the page.
+> **Business Priorities:** the sharpest insight about what's forcing their hand — not a list of stated goals. *Campaign angle:* what we lead with from this priority.
 >
-> **Market & Innovation Focus:** the bet they're making, framed as the buyer's belief — not a tech-stack description. *Page implication:* what next-step or wedge this opens for the vendor.
+> **Strategic Operational Challenges:** the specific friction — not a generic "scale" or "transformation" label. *Campaign angle:* the hook this earns.
+>
+> **Market & Innovation Focus:** the bet they're making, framed as the buyer's belief — not a tech-stack description. *Campaign angle:* the wedge this opens.
 
-Each axis = **one insight sentence + one Page implication sentence**. Lead with the insight, end with the actionable implication. Keep each pair under 2 sentences total — the brief stays scannable.
+Structure rules:
+
+- **Campaign Hook is the thesis** — one line, one argument. The 3 axes below are the proof of that argument. If the 3 axes don't ladder up to the Hook, fix the Hook (or fix the axes — whichever is weaker).
+- Each axis = **one insight sentence + one Campaign angle sentence**. Lead with the account insight, end with the marketer-facing campaign angle.
+- Keep each pair under 2 sentences total — the brief stays scannable.
+- All language is **ABM marketer language**, not designer language. "Campaign angle" / "hook" / "wedge" / "argument" — never "page", "section", "hero", "viewport".
 
 Immediately after rendering the brief, call `AskUserQuestion` with this exact shape:
 
@@ -326,7 +333,9 @@ Before presenting the brief, check:
 - Does every section name the specific account, not a generic placeholder?
 - Are the three account axes (Business Priorities, Strategic Operational Challenges, Market & Innovation Focus) each backed by a real source?
 - Are the three axes **distinct and non-overlapping**? (If "Business Priorities" and "Market & Innovation Focus" say roughly the same thing, sharpen one or both.)
-- Does each axis lead with an **insight** (not a description) and end with a clear **Page implication**?
+- Does each axis lead with an **insight** (not a description) and end with a clear **Campaign angle**?
+- Is the **Campaign Hook** at the top a sharp one-line argument that the 3 axes below support? Does swapping the account logo break the Hook?
+- Is the brief written in **ABM marketer language** (hook, angle, wedge, argument) — not designer language (page, section, hero)?
 - Does the message spine have a clear "why change" and "why now" that could not apply to any other account?
 - Does the proof strategy use only verified, sourced, or user-approved claims? **Zero invented customers, quotes, or stats.**
 - Does the copy direction produce headlines that would break if you swapped the account logo?

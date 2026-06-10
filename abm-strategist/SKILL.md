@@ -25,7 +25,15 @@ Build a focused account-based landing-page brief. Start with a quick intake (off
 
 6. **Speak like a human colleague, not a form.** Before invoking `AskUserQuestion`, write one warm short sentence in the chat to set context ("Let me lock 2 things before I dive in", "Got it. One more thing before I start", "Quick checkpoint before I hand off to the designer"). After the user answers, briefly acknowledge in one sentence and explain the next step ("Great — researching now", "Building the brief"). Popup labels and descriptions should sound conversational, not transactional: prefer "Yeah, research it" over "Yes — research it"; prefer "I'll tell you" over "I'll name it". The whole interaction should feel like a chat with a sharp colleague, not a wizard.
 
-7. **Lead each axis with the strongest angle, not the most obvious one.** Inside each axis, the most defensible argument for the vendor goes FIRST — not the fact the account is most aware of. If the strongest leverage is buried in sentence 3, the brief reads like a report; if it leads sentence 1, the brief reads like a strategy. Ask before writing each axis: "Of everything I know about this account, what's the single insight that makes the vendor's case the strongest?" — and open with that.
+7. **Lead each axis with the strongest angle, not the most obvious one.** Inside each axis, the most defensible argument for the vendor goes FIRST — not the fact the account is most aware of. If the strongest leverage is buried in sentence 3, the brief reads like a report; if it leads sentence 1, the brief reads like a strategy.
+
+   **Mandatory self-check before finalizing each axis:**
+   1. Re-read the 2-3 sentences you wrote for that axis.
+   2. Identify the single strongest pro-vendor argument among them — the line a sharp marketer would underline.
+   3. Is that line the **first sentence**? If yes, ship it. If not, **rewrite** so it is.
+   4. If you cannot identify a clearly strongest argument, the axis is too generic. Sharpen one sentence into a real leverage point before moving on.
+
+   Apply this check to ALL THREE axes, every brief. No exceptions.
 
 8. **Never reference competitors or the market in the abstract — name names.** If the brief says "better-funded competitors," "the market is shifting," "incumbents are losing ground," or anything similar, the next words MUST be specific company names. Abstract competitive language signals lazy research and the buyer (who knows the landscape cold) will notice. If you cannot name the competitors confidently, delete the sentence — don't soften it.
 
@@ -284,6 +292,8 @@ State which shape and why it fits this account's buying motion.
 >
 > **Campaign Hook:** the one-line strategic argument — what we are saying to this account and why it lands now. This is the campaign's thesis, the through-line the 3 axes below support.
 >
+> **Mechanism:** one sentence on how the vendor concretely solves the problem named in the Hook — what the vendor literally DOES for this account. Specific, not abstract. (e.g., "Folloze turns HP's generic AI PC product pages into account-specific microsites for the top 200 enterprises Dell and Lenovo are circling" — not "Folloze enables personalized buyer experiences.")
+>
 > **Business Priorities:** 2-3 sentences of substantive insight — what they have publicly committed to, the specific moves that prove it (numbers, dates, named initiatives), and what's actually forcing their hand. Concrete and account-specific.
 >
 > **Strategic Operational Challenges:** 2-3 sentences of substantive insight — the specific friction the company is working through, the operational reality behind it (who, what scale, what it costs them), and why a generic "scale" or "transformation" label would miss the point.
@@ -300,7 +310,7 @@ Structure rules:
 - **Each axis = 2-3 substantive sentences** — concrete facts, names, numbers, dates. Not a one-line shell. The marketer should be able to read each axis and immediately understand the strategic situation, sourced.
 - **Each axis must cover a distinct angle.** Business Priorities = WHAT they committed to. Operational Challenges = WHERE the friction is TODAY. Market & Innovation = WHY the bet pays off or fails. If two axes restate the same observation, sharpen one or both.
 - **Lead each axis with the strongest argument for the vendor** (Cardinal Rule #7) — not the fact the account is most aware of. Never sell the account their own story back.
-- **Likely buyer + Economic shape are MANDATORY lines** — never skip them. They are what makes the brief actionable for the vendor's account team.
+- **Mechanism + Likely buyer + Economic shape are MANDATORY lines** — never skip them. The Mechanism translates the Hook into something concrete; the buyer and economic lines make the brief actionable for the vendor's account team.
 - **No "Campaign angle" / "Page implication" / "implication" line per axis.** The Hook delivers the campaign direction; the axes deliver the evidence. Action items live in the campaign plan downstream, not in the brief.
 - **All language is ABM marketer language** — never designer language ("page", "section", "hero", "viewport").
 - **Every claim must be sourced.** If the model cannot cite where a fact came from, it does not appear in the brief.
@@ -348,7 +358,8 @@ Before presenting the brief, check:
 - Are the three account axes (Business Priorities, Strategic Operational Challenges, Market & Innovation Focus) each backed by a real source?
 - Are the three axes **distinct and non-overlapping**? (If "Business Priorities" and "Market & Innovation Focus" say roughly the same thing, sharpen one or both.)
 - Does each axis lead with a **substantive insight** (2-3 sentences with concrete facts, numbers, dates, names) — not a one-line shell?
-- Does each axis **lead with the strongest argument for the vendor**, not the fact the account is most aware of?
+- For **each axis**: did you run the Cardinal Rule #7 self-check? Is the **first sentence** the strongest pro-vendor argument in the axis? (If not, the axis fails — rewrite.)
+- Is the **Mechanism** line concrete (what the vendor literally DOES for this account) — not abstract ("enables personalized experiences" = fail)?
 - Is the **Campaign Hook** at the top a sharp one-line argument that the 3 axes substantiate? Does swapping the account logo break the Hook?
 - Are the **Likely buyer** and **Economic shape** lines both present and account-specific?
 - Are any references to competitors or the market backed by **named companies** (not "better-funded competitors" or "the incumbents")? If a name can't be cited, the sentence is deleted.

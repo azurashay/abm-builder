@@ -23,6 +23,8 @@ Build a focused account-based landing-page brief. Start with a quick intake (off
 
 5. **Every user interaction goes through `AskUserQuestion`** — the gap check, the closing checkpoint, any clarification you need mid-research. Never ask the user a question as plain inline text. Pack up to 4 open questions into a single popup call. "Other" is always available for free-text answers. If you catch yourself typing a question as prose, stop and use the tool.
 
+6. **Speak like a human colleague, not a form.** Before invoking `AskUserQuestion`, write one warm short sentence in the chat to set context ("Let me lock 2 things before I dive in", "Got it. One more thing before I start", "Quick checkpoint before I hand off to the designer"). After the user answers, briefly acknowledge in one sentence and explain the next step ("Great — researching now", "Building the brief"). Popup labels and descriptions should sound conversational, not transactional: prefer "Yeah, research it" over "Yes — research it"; prefer "I'll tell you" over "I'll name it". The whole interaction should feel like a chat with a sharp colleague, not a wizard.
+
 ## When To Use
 
 - Building a 1:1 account campaign or buyer experience.
@@ -40,46 +42,48 @@ Before any research, read the prompt and decide which of these are already answe
 
 **Always use the `AskUserQuestion` tool** for the gap check — never ask in plain inline text. The tool renders a clean interactive selector ("Other" is always available for free-text input). Pack the open questions into a single popup (max 4 per call — split into two popups if more than 4 are open).
 
+**Before the popup, say one warm sentence** in the chat — something like "Let me lock 2-3 things before I dive in" or "Quick scope before I start". Then call `AskUserQuestion`.
+
 **Order of questions (skip any that the prompt already answers):**
 
 1. **Vendor** — is the vendor explicitly named? If not, include:
    ```
-   question: "Which vendor are we positioning?"
+   question: "Who are we positioning?"
    header: "Vendor"
    options:
-     - { label: "I'll name it", description: "Type the vendor name in 'Other'" }
+     - { label: "I'll tell you", description: "Type the vendor name in 'Other'" }
    ```
 2. **Target account** — named? If not, include:
    ```
-   question: "Which account are we targeting?"
+   question: "Who's the target account?"
    header: "Account"
    options:
-     - { label: "I'll name it", description: "Type the company name in 'Other'" }
-     - { label: "Recommend 2-3 candidates", description: "Suggest accounts that fit this vendor" }
+     - { label: "I'll tell you", description: "Type the company name in 'Other'" }
+     - { label: "Suggest a few", description: "Recommend 2-3 accounts that fit this vendor" }
    ```
 3. **Product / offering** — is the specific product or offering being positioned named? (Vendors usually have several — we need to know which one.) If not, include:
    ```
-   question: "Which product or offering are we positioning?"
+   question: "Which product are we pitching?"
    header: "Product"
    options:
-     - { label: "I'll name it", description: "Type the product in 'Other'" }
-     - { label: "The full platform", description: "Position the entire portfolio, not one product" }
+     - { label: "I'll tell you", description: "Type the product in 'Other'" }
+     - { label: "Whole platform", description: "Position the entire portfolio, not one product" }
    ```
 4. **Existing material** — did they provide a URL, file, or notes? If not, include:
    ```
-   question: "Do you have any material to feed in?"
+   question: "Got anything I can work with?"
    header: "Material"
    options:
-     - { label: "Yes — I'll upload", description: "PDF, doc, URL, or notes" }
-     - { label: "No, start fresh", description: "Begin from public sources only" }
+     - { label: "Yeah, I'll upload", description: "PDF, doc, URL, or notes" }
+     - { label: "Nope, start fresh", description: "Public sources only" }
    ```
 5. **Research** — did the user ask you to research, or say they already have the context? If not answered, include:
    ```
-   question: "Want me to research, or do you have the context?"
+   question: "Want me to research, or have you got it covered?"
    header: "Research"
    options:
-     - { label: "Yes — research it", description: "Run targeted searches on the vendor, product, and account" }
-     - { label: "I have the context", description: "Skip research, work from what I tell you" }
+     - { label: "Yeah, research it", description: "Run targeted searches on the vendor, product, and account" }
+     - { label: "I've got context", description: "Skip research, work from what I tell you" }
    ```
 
 If all five are already answered in the prompt, **do not call the tool** — skip the gap check entirely and move on. Never ask about persona, buying role, or "who we're speaking to" — that is inferred silently in Phase 2. Never ask in plain text when `AskUserQuestion` is available.
@@ -290,16 +294,16 @@ Structure rules:
 - **All language is ABM marketer language** — never designer language ("page", "section", "hero", "viewport").
 - **Every claim must be sourced.** If the model cannot cite where a fact came from, it does not appear in the brief.
 
-Immediately after rendering the brief, call `AskUserQuestion` with this exact shape:
+After rendering the brief, write one short conversational line ("Tell me what you think — anything to add, or should I hand it off?"), then call `AskUserQuestion` with this exact shape:
 
 ```
-question: "Approve the brief, or add something?"
+question: "What do you think?"
 header: "Brief checkpoint"
 multiSelect: false
 options:
-  - { label: "Build it", description: "Looks good — hand off to the designer" }
+  - { label: "Looks good — build it", description: "Hand off to the designer" }
   - { label: "Add custom assets", description: "ROI artifact, video, document" }
-  - { label: "Adjust wording or tone", description: "Banned language, framing, competitor mentions" }
+  - { label: "Tweak the wording", description: "Banned language, framing, competitor mentions" }
 ```
 
 ("Other" is always available for free-text — the user can type any addition or correction there.)

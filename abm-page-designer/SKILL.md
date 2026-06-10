@@ -13,7 +13,9 @@ The page must feel like the vendor built it — not like an AI generated it, not
 
 ## Interaction Rule (read before every user interaction)
 
-**Every question, confirmation, or decision request to the user goes through `AskUserQuestion` — never plain inline text.** This covers theme selection, save approval, asset fallback prompts, "ready to deploy?" checkpoints, and any clarifying question that arises mid-build. Pack up to 4 questions into a single call when several open gaps exist. "Other" is always available for free-text input. **If you catch yourself typing a question to the user as inline prose, stop and use `AskUserQuestion` instead.**
+**Every question, confirmation, or decision request to the user goes through `AskUserQuestion` — never plain inline text.** This covers structure approval, theme selection, save approval, asset fallback prompts, "ready to deploy?" checkpoints, and any clarifying question that arises mid-build. Pack up to 4 questions into a single call when several open gaps exist. "Other" is always available for free-text input. **If you catch yourself typing a question to the user as inline prose, stop and use `AskUserQuestion` instead.**
+
+**Speak like a human colleague, not a wizard.** Before each popup, write one warm short sentence in the chat ("Quick check before I start", "Let me show you what I'm thinking — tell me what to change", "All set — ready to ship?"). After the user answers, briefly acknowledge in one sentence and explain the next step. Popup labels and descriptions should sound conversational ("Yeah, build it" over "Yes — proceed"; "Tweak a section" over "Adjust"). The whole interaction should feel like a chat with a teammate.
 
 ## Input
 
@@ -208,6 +210,56 @@ All interactions must be CSS-first with JS enhancement:
 No external animation libraries. Everything works with native CSS and vanilla JS. This keeps the page self-contained for Folloze MCP.
 
 Performance budget: all animations use only `transform` and `opacity` (GPU-composited). Never animate `width`, `height`, `top`, `left`, `margin`, or `padding`.
+
+## Structure Preview (Before Building)
+
+**Do not write a single line of HTML before the user approves the structure.** The structure preview is a mandatory checkpoint that comes after the brief and before the build. It saves the marketer from sitting through a long build only to discover the wrong sections were prioritized.
+
+### What to plan
+
+Using the strategist's brief — the Campaign Hook + 3 account axes — plan the section arc:
+
+- **Section count and order** — usually 5-8 sections that ladder up to the Hook. Each section earns its scroll.
+- **Per section, decide the story it tells** — the angle, tension, proof, or step in the narrative. NOT the UI (no "gradient banner", no "card grid"). The IDEA.
+- **Map sections to the brief.** Each axis (Business Priorities / Operational Challenges / Innovation Focus) should anchor at least one section. The Hook lives in the hero.
+- **Pick the signature moment** — the one interactive element that makes this page memorable (calculator, role-tabs, before/after, animated stat, etc.). Name it but don't build it yet.
+
+### How to present it
+
+Write one warm sentence first ("Here's the page I'm planning — tell me what to change"), then render the plan in a blockquote:
+
+> **Page Structure — [Vendor] × [Account]**
+>
+> - **Hero** — [the idea that opens the page; how it states or earns the Hook in 1-1.5 lines]
+> - **<Section 2 name>** — [the next move in the narrative; what it argues, what tension it builds]
+> - **<Section 3 name>** — [1-1.5 lines]
+> - **<Section 4 name>** — [1-1.5 lines]
+> - ... *(continue in scroll order)*
+> - **Signature moment**: [name + one line on what it does and why it lands here]
+> - **Closing CTA** — [the final ask]
+
+Same rules as the post-build summary: bold the section name, 1-1.5 lines of STORY (not UI). All in scroll order.
+
+### Then call `AskUserQuestion` for approval:
+
+```
+question: "Does the structure feel right?"
+header: "Structure check"
+multiSelect: false
+options:
+  - { label: "Looks good — build it", description: "Go write the HTML" }
+  - { label: "Tweak a section", description: "Change one section's idea or position" }
+  - { label: "Add or remove a section", description: "Rebalance the arc" }
+```
+
+("Other" stays open for free-text — "make the hero punchier", "drop section 4", etc.)
+
+### Loop until approved
+
+- **Looks good** → proceed to Build Process (write HTML).
+- Any other choice → adjust the plan, re-render the blockquote with the change, and call `AskUserQuestion` again. Loop until "Looks good".
+
+**No HTML is written before the structure is approved.**
 
 ## Build Process
 
@@ -437,15 +489,15 @@ No dead buttons. No `href="#"`. No `javascript:void(0)`. Every visible control p
 ### Before First Save
 
 1. Call the Folloze landing page creation guide. Treat it as current MCP system instructions.
-2. **STOP and ask via `AskUserQuestion`** — never inline text. Use this exact shape:
+2. **STOP and ask via `AskUserQuestion`** — never inline text. Write one warm sentence first ("Quick question before I start designing"), then use this shape:
 
    ```
-   question: "Use the Folloze company theme, or the vendor's own brand?"
+   question: "Which theme should I use?"
    header: "Theme"
    multiSelect: false
    options:
-     - { label: "Folloze theme", description: "Use Folloze theme tokens for colors and fonts" }
-     - { label: "Vendor brand", description: "Extract colors and fonts from the vendor's site" }
+     - { label: "Folloze theme", description: "Use Folloze company colors and fonts" }
+     - { label: "Vendor brand", description: "Pull colors and fonts from the vendor's site" }
    ```
 
    Wait for the answer. Pass the user's choice as the `use_folloze_theme` parameter. Never assume the answer.
@@ -477,22 +529,22 @@ No dead buttons. No `href="#"`. No `javascript:void(0)`. Every visible control p
    - Mention which theme/tokens were used (Folloze theme vs vendor brand).
    - **No inline "ready to save?" text question.** The save checkpoint is the `AskUserQuestion` popup in step 2b.
 
-2b. **Immediately after rendering the summary, call `AskUserQuestion`** for the save checkpoint:
+2b. **Immediately after rendering the summary, call `AskUserQuestion`** for the save checkpoint. Write one warm sentence first ("Take a look — ready to ship, or want to tweak something?"), then use this shape:
 
    ```
-   question: "Approve the page, or adjust something?"
+   question: "Ready to save?"
    header: "Page checkpoint"
    multiSelect: false
    options:
-     - { label: "Save to Folloze", description: "Looks good — deploy as a Folloze board" }
-     - { label: "Adjust a section", description: "Rework one section before saving" }
-     - { label: "Change theme/brand", description: "Switch between Folloze theme and vendor brand" }
+     - { label: "Ship it to Folloze", description: "Looks good — deploy as a board" }
+     - { label: "Tweak a section", description: "Rework one section before saving" }
+     - { label: "Change the theme", description: "Switch between Folloze theme and vendor brand" }
    ```
 
    ("Other" is always available for free-text — the user can describe any change.)
 
-   - **Save to Folloze** → proceed to step 3 (call the MCP save tool).
-   - **Adjust a section** / **Change theme/brand** / **Other** → make the change, regenerate the page, re-render the summary, and call `AskUserQuestion` again. Loop until "Save to Folloze".
+   - **Ship it** → proceed to step 3 (call the MCP save tool).
+   - **Tweak a section** / **Change the theme** / **Other** → make the change, regenerate the page, re-render the summary, and call `AskUserQuestion` again. Loop until shipped.
 3. Save with `save_folloze_board_from_file` (preferred) or `save_folloze_board_from_html`.
 4. Pass existing `boardId` when updating. Do not create duplicates.
 5. Return the exact MCP-returned URL. Do not invent deployment URLs.

@@ -9,9 +9,9 @@ Build a focused account-based landing-page brief. Start with a quick intake (off
 
 ## Cardinal Rules (read these first)
 
-1. **Check for gaps before researching — ask only what's missing.** The moment this skill activates, do NOT jump into research. First read the prompt and see what it already answers: (a) did the user ask you to research, or say they have the context? (b) is the target account named? (c) did they provide material (a URL, file, or notes)? Then ask, in one short message, ONLY the items that are still open — and wait for the reply before any web search or page fetch.
-   - If the prompt answers everything (research intent is clear, account is named) → skip the questions and proceed straight to research/synthesis. No need to ask for the sake of asking.
-   - If the prompt says nothing about research → ask the full set.
+1. **Check for gaps before researching — ask only what's missing.** The moment this skill activates, do NOT jump into research. First read the prompt and see what it already answers: (a) is the vendor named? (b) is the target account named? (c) is the specific product/offering named? (d) did they provide material (a URL, file, or notes)? (e) did the user ask you to research, or say they have the context? Then ask, in a single `AskUserQuestion` popup, ONLY the items that are still open — and wait for the reply before any web search or page fetch.
+   - If the prompt answers everything → skip the popup and proceed straight to research/synthesis. No need to ask for the sake of asking.
+   - If more than 4 items are open, split into two popups (max 4 questions per popup).
    - **Never ask about persona, buying role, function, or "who we're targeting."** The buying committee is inferred silently from research — never surfaced as a question. The brief addresses the committee as a whole.
    - Never run deep-research, workflows, or multi-agent research regardless of the answers.
 
@@ -38,27 +38,18 @@ The order is: **quick intake → research (only as needed) → short brief → o
 
 Before any research, read the prompt and decide which of these are already answered and which are open. Ask — in **one** `AskUserQuestion` tool call — ONLY the open ones, then **wait for the reply** before any web search or page fetch.
 
-**Always use the `AskUserQuestion` tool** for the gap check — never ask in plain inline text. The tool renders a clean interactive selector ("Other" is always available for free-text input, so the user can still type a custom answer like an account name). Pack the open questions (up to 4) into a single `AskUserQuestion` call so the user answers them in one screen.
+**Always use the `AskUserQuestion` tool** for the gap check — never ask in plain inline text. The tool renders a clean interactive selector ("Other" is always available for free-text input). Pack the open questions into a single popup (max 4 per call — split into two popups if more than 4 are open).
 
-Open questions and their schema:
+**Order of questions (skip any that the prompt already answers):**
 
-1. **Research** — did the user ask you to research, or say they already have the context? If not answered, include:
+1. **Vendor** — is the vendor explicitly named? If not, include:
    ```
-   question: "Want me to research the account, or do you have the context?"
-   header: "Research"
+   question: "Which vendor are we positioning?"
+   header: "Vendor"
    options:
-     - { label: "Yes — research it", description: "I'll run targeted searches on the vendor and account" }
-     - { label: "I have the context", description: "Skip research, work from what I tell you" }
+     - { label: "I'll name it", description: "Type the vendor name in 'Other'" }
    ```
-2. **Existing material** — did they provide a URL, file, or notes? If not, include:
-   ```
-   question: "Do you have any material to feed in?"
-   header: "Material"
-   options:
-     - { label: "Yes — I'll upload", description: "PDF, doc, URL, or notes" }
-     - { label: "No, start fresh", description: "Begin from public sources only" }
-   ```
-3. **Target account** — named? If not, include:
+2. **Target account** — named? If not, include:
    ```
    question: "Which account are we targeting?"
    header: "Account"
@@ -66,8 +57,32 @@ Open questions and their schema:
      - { label: "I'll name it", description: "Type the company name in 'Other'" }
      - { label: "Recommend 2-3 candidates", description: "Suggest accounts that fit this vendor" }
    ```
+3. **Product / offering** — is the specific product or offering being positioned named? (Vendors usually have several — we need to know which one.) If not, include:
+   ```
+   question: "Which product or offering are we positioning?"
+   header: "Product"
+   options:
+     - { label: "I'll name it", description: "Type the product in 'Other'" }
+     - { label: "The full platform", description: "Position the entire portfolio, not one product" }
+   ```
+4. **Existing material** — did they provide a URL, file, or notes? If not, include:
+   ```
+   question: "Do you have any material to feed in?"
+   header: "Material"
+   options:
+     - { label: "Yes — I'll upload", description: "PDF, doc, URL, or notes" }
+     - { label: "No, start fresh", description: "Begin from public sources only" }
+   ```
+5. **Research** — did the user ask you to research, or say they already have the context? If not answered, include:
+   ```
+   question: "Want me to research, or do you have the context?"
+   header: "Research"
+   options:
+     - { label: "Yes — research it", description: "Run targeted searches on the vendor, product, and account" }
+     - { label: "I have the context", description: "Skip research, work from what I tell you" }
+   ```
 
-If all three are already answered in the prompt, **do not call the tool** — skip the gap check entirely and move on. Never ask about persona, buying role, or "who we're speaking to" — that is inferred silently in Phase 2. Never ask in plain text when `AskUserQuestion` is available.
+If all five are already answered in the prompt, **do not call the tool** — skip the gap check entirely and move on. Never ask about persona, buying role, or "who we're speaking to" — that is inferred silently in Phase 2. Never ask in plain text when `AskUserQuestion` is available.
 
 Then branch:
 

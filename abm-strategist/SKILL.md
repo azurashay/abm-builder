@@ -25,6 +25,10 @@ Build a focused account-based landing-page brief. Start with a quick intake (off
 
 6. **Speak like a human colleague, not a form.** Before invoking `AskUserQuestion`, write one warm short sentence in the chat to set context ("Let me lock 2 things before I dive in", "Got it. One more thing before I start", "Quick checkpoint before I hand off to the designer"). After the user answers, briefly acknowledge in one sentence and explain the next step ("Great — researching now", "Building the brief"). Popup labels and descriptions should sound conversational, not transactional: prefer "Yeah, research it" over "Yes — research it"; prefer "I'll tell you" over "I'll name it". The whole interaction should feel like a chat with a sharp colleague, not a wizard.
 
+7. **Lead each axis with the strongest angle, not the most obvious one.** Inside each axis, the most defensible argument for the vendor goes FIRST — not the fact the account is most aware of. If the strongest leverage is buried in sentence 3, the brief reads like a report; if it leads sentence 1, the brief reads like a strategy. Ask before writing each axis: "Of everything I know about this account, what's the single insight that makes the vendor's case the strongest?" — and open with that.
+
+8. **Never reference competitors or the market in the abstract — name names.** If the brief says "better-funded competitors," "the market is shifting," "incumbents are losing ground," or anything similar, the next words MUST be specific company names. Abstract competitive language signals lazy research and the buyer (who knows the landscape cold) will notice. If you cannot name the competitors confidently, delete the sentence — don't soften it.
+
 ## When To Use
 
 - Building a 1:1 account campaign or buyer experience.
@@ -285,11 +289,18 @@ State which shape and why it fits this account's buying motion.
 > **Strategic Operational Challenges:** 2-3 sentences of substantive insight — the specific friction the company is working through, the operational reality behind it (who, what scale, what it costs them), and why a generic "scale" or "transformation" label would miss the point.
 >
 > **Market & Innovation Focus:** 2-3 sentences of substantive insight — the bet they're making, the concrete proof of that bet (acquisitions, product launches, exec statements, partnerships), and what the buyer needs to believe for the bet to pay off.
+>
+> **Likely buyer:** the actual buyer for THIS purchase at this account — by function and seniority (e.g., "CTO + VP R&D + Head of IT"). NOT the company's strategic decision-maker if they aren't the operational buyer. One line that tells the vendor's account team where to start.
+>
+> **Economic shape:** the order-of-magnitude cost or commitment the deal asks the account to make, and the angle of justification. One line. If the deal is low-stakes (under $50K), say "low capex — justification on speed/quality, not ROI." If high-stakes, name the rough capex and the ROI lever (e.g., "$1.1M capex; justification has to lean on current cloud GPU spend at iteration cadence").
 
 Structure rules:
 
 - **Campaign Hook is the thesis** — one line, one argument. The 3 axes below are the substance that justifies the Hook. If swapping the account logo doesn't break the Hook, the Hook is too generic.
 - **Each axis = 2-3 substantive sentences** — concrete facts, names, numbers, dates. Not a one-line shell. The marketer should be able to read each axis and immediately understand the strategic situation, sourced.
+- **Each axis must cover a distinct angle.** Business Priorities = WHAT they committed to. Operational Challenges = WHERE the friction is TODAY. Market & Innovation = WHY the bet pays off or fails. If two axes restate the same observation, sharpen one or both.
+- **Lead each axis with the strongest argument for the vendor** (Cardinal Rule #7) — not the fact the account is most aware of. Never sell the account their own story back.
+- **Likely buyer + Economic shape are MANDATORY lines** — never skip them. They are what makes the brief actionable for the vendor's account team.
 - **No "Campaign angle" / "Page implication" / "implication" line per axis.** The Hook delivers the campaign direction; the axes deliver the evidence. Action items live in the campaign plan downstream, not in the brief.
 - **All language is ABM marketer language** — never designer language ("page", "section", "hero", "viewport").
 - **Every claim must be sourced.** If the model cannot cite where a fact came from, it does not appear in the brief.
@@ -339,7 +350,10 @@ Before presenting the brief, check:
 - Are the three account axes (Business Priorities, Strategic Operational Challenges, Market & Innovation Focus) each backed by a real source?
 - Are the three axes **distinct and non-overlapping**? (If "Business Priorities" and "Market & Innovation Focus" say roughly the same thing, sharpen one or both.)
 - Does each axis lead with a **substantive insight** (2-3 sentences with concrete facts, numbers, dates, names) — not a one-line shell?
+- Does each axis **lead with the strongest argument for the vendor**, not the fact the account is most aware of?
 - Is the **Campaign Hook** at the top a sharp one-line argument that the 3 axes substantiate? Does swapping the account logo break the Hook?
+- Are the **Likely buyer** and **Economic shape** lines both present and account-specific?
+- Are any references to competitors or the market backed by **named companies** (not "better-funded competitors" or "the incumbents")? If a name can't be cited, the sentence is deleted.
 - Is the brief written in **ABM marketer language** — never designer language (page, section, hero)?
 - Are there **zero "Campaign angle" / "Page implication" lines** in the visible output? (Action items live downstream, not in the brief.)
 - Does the message spine have a clear "why change" and "why now" that could not apply to any other account?

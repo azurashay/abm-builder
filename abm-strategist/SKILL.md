@@ -322,7 +322,7 @@ options:
 Checkpoint rules:
 
 - **Never print an inline "anything to add?" text question** — the popup IS the checkpoint. Inline text and the popup together feel duplicative.
-- **Build it** → hand off straight to the designer with no further dialogue.
+- **"Looks good — build it"** → hand off **immediately** to the page-designer skill with no further dialogue. **Do NOT ask the user to type "build"**, do NOT print "Brief is ready, say build", do NOT echo a handoff message. The popup choice IS the handoff signal. Invoke the page-designer skill directly.
 - Any other choice (or "Other" with free text) → fold the addition into the working brief and confirm in one line — no need to re-present the whole brief.
 - If the user already approved in the same message that triggered the brief, skip the popup.
 
@@ -336,11 +336,9 @@ Hold the full brief — every section under Brief Structure above — in your wo
 
 ## Handoff
 
-When the user approves, tell them:
+The handoff happens **automatically** when the user picks "Looks good — build it" in the checkpoint popup. **Never** print a "Brief is ready, say build" message or any other handoff prose — the popup choice IS the trigger. Once the user picks that option, immediately invoke the `abm-page-designer` skill (the full Brief Structure stays in the conversation; the designer reads it directly).
 
-> Brief is ready. Say "build" and I'll design and deploy the page from it.
-
-Do not attempt to build, design, or deploy anything. That is the next skill's job.
+Do not attempt to build, design, or deploy anything yourself. That is the next skill's job. Your job ends at the checkpoint.
 
 ## Quality Gate
 

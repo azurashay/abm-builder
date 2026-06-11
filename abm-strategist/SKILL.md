@@ -340,6 +340,20 @@ State which shape and why it fits this account's buying motion.
 
 ## Output
 
+### STOP — READ THIS BEFORE PROCEEDING
+
+**Before you call `AskUserQuestion` for the Brief checkpoint, the brief blockquote MUST already exist as visible text in your current assistant message.** This is not optional. The popup is the approval mechanism FOR the brief — without the brief printed first, the popup has nothing to approve and the user sees an empty question.
+
+**Verify before calling the tool:**
+
+1. Have you written `> **[Vendor] → [Account]**` and the rest of the brief blockquote in your current assistant message? → If NO, write it now.
+2. Have you added a short conversational sentence after the brief ("Tell me what you think — anything to add, or should I hand it off?")? → If NO, add it.
+3. ONLY when both are done → call `AskUserQuestion`.
+
+If you find yourself with an empty or near-empty assistant message and an urge to call `AskUserQuestion`, you have skipped the brief. Stop. Write the brief blockquote first.
+
+### Brief template (this is what you print)
+
 **This is the only thing you print.** Present a short brief — not the full structure, not the research. Keep it scannable: the user should be able to read it in well under a minute and either approve it or correct one thing. The brief lives inside a blockquote and ends with the 3 axes — no inline "anything to add?" text. The checkpoint comes immediately after as an `AskUserQuestion` popup:
 
 > **[Vendor] → [Account]**
@@ -399,6 +413,18 @@ Checkpoint rules:
 - If the user already approved in the same message that triggered the brief, skip the popup but still run the Structure Preview.
 
 ## Structure Preview (after brief approval, before handoff)
+
+### STOP — READ THIS BEFORE PROCEEDING
+
+**Before you call `AskUserQuestion` for the Structure check, the Page Structure blockquote MUST already exist as visible text in your current assistant message.** Same rule as the Brief checkpoint. The popup is the approval mechanism FOR the structure — without the structure printed first, the popup has nothing to approve.
+
+**Verify before calling the tool:**
+
+1. Have you written `> **Page Structure — [Vendor] × [Account]**` and the section list in your current assistant message? → If NO, write it now.
+2. Have you added a short conversational sentence ("Here's the page I'm planning — tell me what to change")? → If NO, add it.
+3. ONLY when both are done → call `AskUserQuestion`.
+
+### When and why
 
 After the user approves the brief with "Looks good — build it", **do not hand off yet**. Present the page structure plan, get approval, then hand off.
 

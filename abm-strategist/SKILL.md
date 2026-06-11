@@ -32,6 +32,8 @@ Build a focused account-based landing-page brief. Start with a quick intake (off
 
 5. **Every user interaction goes through `AskUserQuestion`** — the gap check, the closing checkpoint, any clarification you need mid-research. Never ask the user a question as plain inline text. Pack up to 4 open questions into a single popup call. "Other" is always available for free-text answers. If you catch yourself typing a question as prose, stop and use the tool.
 
+   **Critical: the popup is NEVER a substitute for the visible deliverable.** Whenever the popup asks the user to approve content (a brief, a structure, a section summary), the content itself MUST appear as visible text in your assistant message BEFORE the popup is called. The popup is the approval mechanism — the deliverable is what gets approved. Calling the popup without printing the deliverable above it is always a bug. Exception: gap-check questions at the very start (no deliverable yet) and theme/clarifying questions (no content to approve).
+
 6. **Speak like a human colleague, not a form.** Before invoking `AskUserQuestion`, write one warm short sentence in the chat to set context ("Let me lock 2 things before I dive in", "Got it. One more thing before I start", "Quick checkpoint before I hand off to the designer"). After the user answers, briefly acknowledge in one sentence and explain the next step ("Great — researching now", "Building the brief"). Popup labels and descriptions should sound conversational, not transactional: prefer "Yeah, research it" over "Yes — research it"; prefer "I'll tell you" over "I'll name it". The whole interaction should feel like a chat with a sharp colleague, not a wizard.
 
 7. **Lead each axis with the strongest angle, not the most obvious one.** Inside each axis, the most defensible argument for the vendor goes FIRST — not the fact the account is most aware of. If the strongest leverage is buried in sentence 3, the brief reads like a report; if it leads sentence 1, the brief reads like a strategy.
@@ -334,7 +336,15 @@ Structure rules:
 - **All language is ABM marketer language** — never designer language ("page", "section", "hero", "viewport").
 - **Every claim must be sourced.** If the model cannot cite where a fact came from, it does not appear in the brief.
 
-After rendering the brief, write one short conversational line ("Tell me what you think — anything to add, or should I hand it off?"), then call `AskUserQuestion` with this exact shape:
+**MANDATORY ORDER — do not skip steps:**
+
+1. **Print the full brief** as a blockquote in the chat (visible to the user). The brief blockquote must appear in your assistant message BEFORE you call any tool.
+2. Write one short conversational line ("Tell me what you think — anything to add, or should I hand it off?").
+3. THEN call `AskUserQuestion`.
+
+If you call `AskUserQuestion` without first printing the brief blockquote above it, you have broken the rule. The popup is NOT a substitute for the visible brief — it's the approval mechanism FOR the brief. The user must see the brief to decide.
+
+Call `AskUserQuestion` with this exact shape:
 
 ```
 question: "What do you think?"
@@ -382,7 +392,13 @@ Using the brief — Hook + Mechanism + 3 axes + Likely buyer + Economic shape �
 
 ### How to present it
 
-Write one warm sentence first ("Here's the page I'm planning — tell me what to change"), then render the plan in a blockquote:
+**MANDATORY ORDER — do not skip steps:**
+
+1. Write one warm sentence ("Here's the page I'm planning — tell me what to change").
+2. **Print the full Page Structure blockquote** as visible text in your assistant message. It must appear BEFORE any tool call.
+3. THEN call `AskUserQuestion`.
+
+Use this exact shape for the blockquote:
 
 > **Page Structure — [Vendor] × [Account]**
 >
@@ -395,6 +411,8 @@ Write one warm sentence first ("Here's the page I'm planning — tell me what to
 > - **Closing CTA** — [the final ask]
 
 Bold the section name, 1-1.5 lines of STORY (not UI). All in scroll order.
+
+**If you call `AskUserQuestion` without first printing the structure blockquote above it, you have broken the rule.** The popup is the approval mechanism — it is NOT a substitute for the visible structure. The user must see the structure to decide.
 
 ### Then call `AskUserQuestion` for approval:
 

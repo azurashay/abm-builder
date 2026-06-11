@@ -281,6 +281,22 @@ You don't get to add sections, drop sections, or reorder them. If the structure 
 
 ### Step 1 — Set the Aesthetic Direction
 
+**This step is theme-mode-aware. Do the right thing for the mode the user picked in Step 1 — Theme Decision.**
+
+#### Mode A — Folloze theme
+
+The aesthetic direction is dictated by the **Folloze theme tokens, not the vendor's site**.
+
+- Read the theme's color mode by inspecting the theme variables (typically `--fz-color-neutral-0` is the body background — light or dark tells you the mode).
+- All colors come from `--fz-color-*` variables. Never hardcode a hex.
+- All fonts come from the theme's font variables. Never reference the vendor's fonts.
+- Section rhythm, dark/light alternation, accent usage — all dictated by the Folloze theme's design language, not the vendor's source URL.
+- **Do NOT pick a direction (Dark authority / Light precision / Bold gradient / Editorial depth / Technical craft) based on the vendor's site.** Those vocabulary labels apply to Mode B only.
+
+Skip the rest of this step. Move to Step 2.
+
+#### Mode B — Vendor brand
+
 The vendor's actual website determines the aesthetic, NOT the vendor's category. An "enterprise infrastructure" brand may still be a light, minimal site — don't decide based on industry. You must have already completed the **Brand Capture Gate** above before this step: you have the real hex values, fonts, and color mode from the live URL.
 
 Match the live source. The directions below are vocabulary for describing what you saw, not categories you choose by industry:
@@ -397,8 +413,28 @@ Single self-contained HTML file. Everything inline:
 - `<style>` block with CSS custom properties for the entire design system
 - Semantic HTML5 structure
 - `<script>` block at the end for all interactions
-- Google Fonts loaded via `<link>` in `<head>`
-- Folloze theme stylesheet loaded as required by the MCP guide
+- Google Fonts loaded via `<link>` in `<head>` — **Mode B only**
+- Folloze theme stylesheet loaded as required by the MCP guide — **Mode A always; Mode B if theme present**
+
+#### Mode A — Folloze theme: STRICT CSS rules
+
+**Zero hardcoded hex colors in the page.** Every color reference uses a Folloze theme variable:
+
+- Backgrounds: `var(--fz-color-neutral-0)`, `var(--fz-color-neutral-1)`, etc.
+- Text: `var(--fz-color-neutral-5)`, `var(--fz-color-neutral-4)`, etc.
+- Accents / primary: `var(--fz-color-primary-1)` through `--fz-color-primary-5`
+- Secondary / supporting: `var(--fz-color-secondary-*)`
+- Buttons / CTAs: theme primary tokens; do NOT invent gradients with vendor hex values
+
+**Zero font names from the vendor.** All `font-family` declarations use the theme's font variables (or the literal font name the theme uses, if no variable is exposed). No Google Fonts `<link>` for vendor fonts. The theme stylesheet brings what's needed.
+
+**No `:root { --vendor-blue: #...; }` blocks** that re-define a vendor color palette. The theme IS the palette.
+
+**Quick check before saving:** grep the HTML for `#` followed by 3 or 6 hex characters in CSS contexts. Each hit must be either inside a comment OR a theme override that the theme itself uses (extremely rare). If you find raw vendor hex values, you've mixed modes. Refactor to use `var(--fz-color-*)`.
+
+#### Mode B — Vendor brand
+
+Define your own CSS custom properties at `:root` using the vendor's exact hex values. Use Google Fonts `<link>`. The Folloze theme stylesheet is loaded only if the MCP guide explicitly requires it.
 
 Structure:
 ```html
@@ -439,6 +475,16 @@ Structure:
 ```
 
 ### Step 4 — Typography That Commands
+
+**Theme-mode-aware.**
+
+#### Mode A — Folloze theme
+
+Fonts come from the **Folloze theme tokens**. Use the theme's font variables in all `font-family` declarations. Do NOT pick fonts based on the vendor's typographic personality. Do NOT load Google Fonts unless the theme itself references them.
+
+Skip the rest of this step. Move to Step 5.
+
+#### Mode B — Vendor brand
 
 Do not use Inter, Roboto, Arial, or system fonts. Each page gets a distinctive font pairing:
 

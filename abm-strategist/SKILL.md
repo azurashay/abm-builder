@@ -351,9 +351,71 @@ options:
 Checkpoint rules:
 
 - **Never print an inline "anything to add?" text question** — the popup IS the checkpoint. Inline text and the popup together feel duplicative.
-- **"Looks good — build it"** → hand off **immediately** to the page-designer skill with no further dialogue. **Do NOT ask the user to type "build"**, do NOT print "Brief is ready, say build", do NOT echo a handoff message. The popup choice IS the handoff signal. Invoke the page-designer skill directly.
+- **"Looks good — build it"** → proceed to the **Structure Preview** step (see next section), NOT a direct handoff. The structure preview is a mandatory step before the page-designer is invoked.
 - Any other choice (or "Other" with free text) → fold the addition into the working brief and confirm in one line — no need to re-present the whole brief.
-- If the user already approved in the same message that triggered the brief, skip the popup.
+- If the user already approved in the same message that triggered the brief, skip the popup but still run the Structure Preview.
+
+## Structure Preview (after brief approval, before handoff)
+
+After the user approves the brief with "Looks good — build it", **do not hand off yet**. Present the page structure plan, get approval, then hand off.
+
+**Why this step exists:** if the structure is presented only after the designer has done brand capture and started building, any structural change requires reverting expensive work. Presenting the structure here — before the designer touches the page — makes changes cheap.
+
+### Depth division (read before planning)
+
+This is **narrative architecture**, not visual execution:
+
+- **Strategist plans** (this step): section count and order, the story each section tells, where the **signature moment** lives in the arc, which axis from the brief anchors each section, the closing CTA shape.
+- **Designer translates** (after handoff): the specific TYPE of signature moment (tabs / calculator / before-after / role-mapper / etc.), image density per section, layout patterns, micro-interactions — based on the vendor's actual visual brand.
+
+Do NOT plan visual specifics here. No "bento grid", no "gradient hero", no "card grid with hover states". Plan the STORY each section delivers.
+
+### What to plan
+
+Using the brief — Hook + Mechanism + 3 axes + Likely buyer + Economic shape — plan the section arc:
+
+- **Section count and order** — usually 5-8 sections that ladder up to the Hook. Each section earns its scroll. Hero anchors the Hook.
+- **Per section, decide the story it tells** — the angle, tension, proof, or step in the narrative. NOT the UI.
+- **Map sections to the brief.** Each axis (Business Priorities / Operational Challenges / Innovation Focus) should anchor at least one section. The Hook lives in the hero. The Mechanism gets a dedicated section. Likely buyer surfaces as a committee/role section. Economic shape closes the page or anchors an economics section.
+- **Pick the signature moment** — name what it does and why it lands HERE in the arc (e.g., "Mechanism section maps the deal lifecycle"). Don't specify the visual form — that's the designer's call.
+- **Closing CTA shape** — what action ends the page (e.g., "90-day pilot for the top 50 accounts").
+
+### How to present it
+
+Write one warm sentence first ("Here's the page I'm planning — tell me what to change"), then render the plan in a blockquote:
+
+> **Page Structure — [Vendor] × [Account]**
+>
+> - **Hero** — [the idea that opens the page; how it states or earns the Hook in 1-1.5 lines]
+> - **<Section 2 name>** — [the next move in the narrative; what it argues, what tension it builds]
+> - **<Section 3 name>** — [1-1.5 lines]
+> - **<Section 4 name>** — [1-1.5 lines]
+> - ... *(continue in scroll order)*
+> - **Signature moment**: [where in the arc it sits + one line on what it does and why it lands here — NOT what shape it takes]
+> - **Closing CTA** — [the final ask]
+
+Bold the section name, 1-1.5 lines of STORY (not UI). All in scroll order.
+
+### Then call `AskUserQuestion` for approval:
+
+```
+question: "Does the structure feel right?"
+header: "Structure check"
+multiSelect: false
+options:
+  - { label: "Looks good — build it", description: "Hand off to the designer to build" }
+  - { label: "Tweak a section", description: "Change one section's idea or position" }
+  - { label: "Add or remove a section", description: "Rebalance the arc" }
+```
+
+("Other" stays open for free-text — "make the hero punchier", "drop section 4", etc.)
+
+### Loop until approved
+
+- **Looks good — build it** → hand off **immediately** to the page-designer skill. The approved structure (and the full brief) inherits into the conversation. Designer reads it and builds directly.
+- Any other choice → adjust the plan, re-render the blockquote with the change, and call `AskUserQuestion` again. Loop until "Looks good".
+
+**No designer invocation happens before the structure is approved.**
 
 ### Strict No-Output Rules (override tool defaults)
 
@@ -365,9 +427,9 @@ Hold the full brief — every section under Brief Structure above — in your wo
 
 ## Handoff
 
-The handoff happens **automatically** when the user picks "Looks good — build it" in the checkpoint popup. **Never** print a "Brief is ready, say build" message or any other handoff prose — the popup choice IS the trigger. Once the user picks that option, immediately invoke the `abm-page-designer` skill (the full Brief Structure stays in the conversation; the designer reads it directly).
+The handoff happens **automatically** when the user picks "Looks good — build it" in the **Structure Preview** popup (not the earlier brief checkpoint). **Never** print a "Brief is ready, say build" message or any other handoff prose — the popup choice IS the trigger. Once the user picks that option, immediately invoke the `abm-page-designer` skill (the full Brief Structure and the approved Page Structure stay in the conversation; the designer reads both directly and builds from them).
 
-Do not attempt to build, design, or deploy anything yourself. That is the next skill's job. Your job ends at the checkpoint.
+Do not attempt to build, design, or deploy anything yourself. That is the next skill's job. Your job ends at the Structure Preview checkpoint.
 
 ## Quality Gate
 

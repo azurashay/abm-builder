@@ -19,13 +19,15 @@ The page must feel like the vendor built it — not like an AI generated it, not
 
 ## Input
 
-Read the campaign brief before doing anything:
+Read the campaign brief AND the approved page structure before doing anything:
 
-1. Take the brief from the conversation — the `abm-strategist` skill produced it earlier in this session (its full strategy, plus any adjustments the user approved). Read it directly from the conversation; there is no file to load.
-2. If no brief exists in the conversation, ask the user to run the `abm-strategist` skill first, or to provide the brief manually.
-3. Work from: account context, vendor positioning, message spine, audience mode, buying committee, copy direction, proof strategy, section arc, and experience shape recommendation.
+1. Take the brief from the conversation — the `abm-strategist` skill produced it earlier in this session (its full strategy + the Page Structure the user approved). Read both directly from the conversation; there is no file to load.
+2. If no brief OR no approved structure exists in the conversation, ask the user to run `abm-strategist` first. Do NOT plan structure yourself.
+3. Work from: account context, vendor positioning, message spine, audience mode, buying committee, copy direction, proof strategy, AND the approved Page Structure (section count, order, per-section story, signature moment placement, closing CTA).
 
-The brief is your creative constraint. Do not re-research the account or rewrite the messaging. Build what the strategist defined.
+The brief is your creative constraint. The structure is your section plan. Do not re-research the account, do not rewrite the messaging, do not re-plan sections. Build what the strategist defined.
+
+See **"Input — The Approved Structure"** below for the depth division between the two skills.
 
 ## Source Brand Capture
 
@@ -211,55 +213,27 @@ No external animation libraries. Everything works with native CSS and vanilla JS
 
 Performance budget: all animations use only `transform` and `opacity` (GPU-composited). Never animate `width`, `height`, `top`, `left`, `margin`, or `padding`.
 
-## Structure Preview (Before Building)
+## Input — The Approved Structure
 
-**Do not write a single line of HTML before the user approves the structure.** The structure preview is a mandatory checkpoint that comes after the brief and before the build. It saves the marketer from sitting through a long build only to discover the wrong sections were prioritized.
+When this skill activates, the `abm-strategist` has already completed two checkpoints with the user:
 
-### What to plan
+1. **The brief** — Hook, Mechanism, 3 axes, Likely buyer, Economic shape.
+2. **The page structure** — section count and order, per-section story, where the signature moment sits in the arc, the closing CTA shape.
 
-Using the strategist's brief — the Campaign Hook + 3 account axes — plan the section arc:
+**Both live in the conversation. Read both. Do not re-plan.** The structure was approved — building it is your job. If the structure is missing (e.g., the strategist was skipped), ask the user to run `abm-strategist` first.
 
-- **Section count and order** — usually 5-8 sections that ladder up to the Hook. Each section earns its scroll.
-- **Per section, decide the story it tells** — the angle, tension, proof, or step in the narrative. NOT the UI (no "gradient banner", no "card grid"). The IDEA.
-- **Map sections to the brief.** Each axis (Business Priorities / Operational Challenges / Innovation Focus) should anchor at least one section. The Hook lives in the hero.
-- **Pick the signature moment** — the one interactive element that makes this page memorable (calculator, role-tabs, before/after, animated stat, etc.). Name it but don't build it yet.
+**Do NOT present a structure preview, do NOT show a section-by-section plan, do NOT ask the user "does this feel right" about the architecture.** Those checkpoints already happened. Your first user-facing interaction in this skill is the theme question (see Folloze MCP Deployment → Before First Save).
 
-### How to present it
+### Depth division (read once)
 
-Write one warm sentence first ("Here's the page I'm planning — tell me what to change"), then render the plan in a blockquote:
+The strategist owns the **narrative architecture** — what sections exist, in what order, telling what story, with the signature moment anchored at a specific spot. You own the **visual translation**:
 
-> **Page Structure — [Vendor] × [Account]**
->
-> - **Hero** — [the idea that opens the page; how it states or earns the Hook in 1-1.5 lines]
-> - **<Section 2 name>** — [the next move in the narrative; what it argues, what tension it builds]
-> - **<Section 3 name>** — [1-1.5 lines]
-> - **<Section 4 name>** — [1-1.5 lines]
-> - ... *(continue in scroll order)*
-> - **Signature moment**: [name + one line on what it does and why it lands here]
-> - **Closing CTA** — [the final ask]
+- **Pick the form of the signature moment** based on the vendor's brand (tabs / calculator / before-after slider / role-mapper / animated diagram / etc.) — the strategist said WHERE it sits and WHAT it does; you choose HOW it looks.
+- **Set image density per section** based on whether the vendor is image-rich or minimal/type-led (after brand capture).
+- **Pick layout patterns** for each section (asymmetric split / bento / full-bleed statement / timeline / etc.) based on the brand's visual personality.
+- **Translate per-section stories into HTML** with real harvested images, real numbers, name-verified logos.
 
-Same rules as the post-build summary: bold the section name, 1-1.5 lines of STORY (not UI). All in scroll order.
-
-### Then call `AskUserQuestion` for approval:
-
-```
-question: "Does the structure feel right?"
-header: "Structure check"
-multiSelect: false
-options:
-  - { label: "Looks good — build it", description: "Go write the HTML" }
-  - { label: "Tweak a section", description: "Change one section's idea or position" }
-  - { label: "Add or remove a section", description: "Rebalance the arc" }
-```
-
-("Other" stays open for free-text — "make the hero punchier", "drop section 4", etc.)
-
-### Loop until approved
-
-- **Looks good** → proceed to Build Process (write HTML).
-- Any other choice → adjust the plan, re-render the blockquote with the change, and call `AskUserQuestion` again. Loop until "Looks good".
-
-**No HTML is written before the structure is approved.**
+You don't get to add sections, drop sections, or reorder them. If the structure feels off mid-build, raise it once via `AskUserQuestion` — don't silently change it.
 
 ## Build Process
 

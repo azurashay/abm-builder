@@ -57,7 +57,17 @@ Build a focused account-based landing-page brief. Start with a quick intake (off
 
 ## Process
 
-The order is: **quick intake → research (only as needed) → short brief → one "anything to add?" check → build.**
+The order is: **gap check → research → synthesize → PRINT brief → brief checkpoint → PRINT structure → structure checkpoint → handoff.**
+
+**Two hard-stop print steps that the model must execute as separate assistant turns:**
+
+- **PRINT brief** = the brief blockquote must appear as visible text in the chat BEFORE the brief checkpoint popup. Not optional. Not implicit.
+- **PRINT structure** = the structure blockquote must appear as visible text in the chat BEFORE the structure checkpoint popup. Not optional. Not implicit.
+
+A common failure mode after a long research phase is to jump straight from the last tool result to `AskUserQuestion` — skipping the print step. If you catch yourself reaching for the popup tool right after a research/tool result, **STOP**, print the deliverable first, THEN call the tool.
+
+❌ WRONG pattern: `Web search → Web search → Page fetch → AskUserQuestion` (no brief visible)
+✅ RIGHT pattern: `Web search → Web search → Page fetch → [print brief blockquote] → one sentence → AskUserQuestion`
 
 ### Step 0 — Gap check (ask only what's missing, then wait)
 
@@ -165,6 +175,29 @@ For pains, proof, committee, and constraints, rely on the research and sensible 
 ### Phase 3 — Synthesize
 
 Work the full structure below in your notes — it is your internal reasoning, NOT your output. **Never print the Brief Structure sections to the user.** Your only visible output is the short brief from the Output section. Every claim must be account-specific — if swapping in a different account logo would not break it, sharpen it.
+
+### Phase 4 — Print the brief (REQUIRED before any popup)
+
+After synthesis, **the very next assistant message must include the brief blockquote as visible text**. This is a hard-stop step — not a guideline.
+
+- Open a new assistant turn.
+- Print the brief blockquote (the exact shape defined in the Output section).
+- Add one short conversational line ("Tell me what you think — anything to add, or should I hand it off?").
+- THEN — and only then — call `AskUserQuestion` for the brief checkpoint.
+
+If you call `AskUserQuestion` without the brief blockquote visible above it in the same or prior assistant message, the run is broken. Do not rationalize it. Print first.
+
+### Phase 5 — Brief checkpoint
+
+The popup follows the printed brief. See the Output section below for the exact popup shape and the loop logic.
+
+### Phase 6 — Print the structure (REQUIRED before any popup)
+
+After the brief checkpoint resolves with "Looks good — build it", **the very next assistant message must include the Page Structure blockquote as visible text**. Same rule as Phase 4 — print before popup.
+
+### Phase 7 — Structure checkpoint, then handoff
+
+The structure popup follows the printed structure. On "Looks good — build it", invoke the page-designer skill. See the Structure Preview section below.
 
 ## Brief Structure
 

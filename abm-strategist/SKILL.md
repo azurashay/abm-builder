@@ -385,16 +385,21 @@ Structure rules:
 
 **MANDATORY ORDER — do not skip steps:**
 
-1. **Print the full brief** as a blockquote in the chat (visible to the user). The brief blockquote must appear in your assistant message BEFORE you call any tool.
-2. Write one short conversational line ("Tell me what you think — anything to add, or should I hand it off?").
-3. THEN call `AskUserQuestion`.
+1. **Print the full brief** as a blockquote in the chat (visible to the user).
+2. Write one inline closing line: *"Tell me what you think — say **'build'** to hand off to the designer, or describe what to change. (You can also click an option below.)"*
+3. THEN call `AskUserQuestion` as a backup approval mechanism.
 
-If you call `AskUserQuestion` without first printing the brief blockquote above it, you have broken the rule. The popup is NOT a substitute for the visible brief — it's the approval mechanism FOR the brief. The user must see the brief to decide.
+The popup question text explicitly references "the brief above" — so the brief MUST be visible above the popup. If you call `AskUserQuestion` and the brief blockquote is not in your assistant message, the question text makes no sense to the user.
+
+The flow accepts EITHER response:
+- User types "build" → handoff immediately
+- User clicks "Looks good — build it" → handoff immediately
+- User types text or clicks other options → fold the addition into the brief and confirm in one line
 
 Call `AskUserQuestion` with this exact shape:
 
 ```
-question: "What do you think?"
+question: "What do you think about the brief above?"
 header: "Brief checkpoint"
 multiSelect: false
 options:
@@ -454,8 +459,9 @@ Using the brief — Hook + Mechanism + 3 axes + Likely buyer + Economic shape �
 **MANDATORY ORDER — do not skip steps:**
 
 1. Write one warm sentence ("Here's the page I'm planning — tell me what to change").
-2. **Print the full Page Structure blockquote** as visible text in your assistant message. It must appear BEFORE any tool call.
-3. THEN call `AskUserQuestion`.
+2. **Print the full Page Structure blockquote** as visible text in your assistant message.
+3. Write one inline closing line: *"Say **'build'** to hand off to the designer, or tell me what to change. (You can also click an option below.)"*
+4. THEN call `AskUserQuestion` as a backup approval mechanism.
 
 Use this exact shape for the blockquote:
 
@@ -471,12 +477,17 @@ Use this exact shape for the blockquote:
 
 Bold the section name, 1-1.5 lines of STORY (not UI). All in scroll order.
 
-**If you call `AskUserQuestion` without first printing the structure blockquote above it, you have broken the rule.** The popup is the approval mechanism — it is NOT a substitute for the visible structure. The user must see the structure to decide.
+The popup question text explicitly references "the structure above" — so the structure MUST be visible above the popup. If you call `AskUserQuestion` and the structure blockquote is not in your assistant message, the question makes no sense.
+
+The flow accepts EITHER response:
+- User types "build" → hand off to designer immediately
+- User clicks "Looks good — build it" → hand off to designer immediately
+- Other choice (typed or clicked) → adjust the plan, re-render the blockquote, and call `AskUserQuestion` again
 
 ### Then call `AskUserQuestion` for approval:
 
 ```
-question: "Does the structure feel right?"
+question: "Does the structure above feel right?"
 header: "Structure check"
 multiSelect: false
 options:

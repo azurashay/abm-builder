@@ -156,6 +156,17 @@ Always add a gradient overlay over background images so text stays readable. Ver
 
 **Cannot find real images? Stop and ask the user.** No stock photos. No placeholders. No generic illustrations. And never fabricate a product screenshot, dashboard, or chart in HTML/CSS as a substitute — harvest the real one or ask the user for it.
 
+**Never invent a CDN or DAM URL pattern.** If you have not observed a URL actually loading (via WebFetch / Chrome MCP) on the vendor's live site, you cannot use it. Common fabrications to avoid:
+
+- `content.dam.{company}.global/...`  (DAM-naming guesses — usually NXDOMAIN)
+- `assets.{company}.cdn/...`
+- `media.{company}.com/{path}` invented from category convention
+- Path-extending real CDNs with made-up filenames (e.g., real `resources.vendor.com/is/image/` + invented `/misc/gen-ai-graphic-1.png`)
+
+A URL that "looks reasonable for a vendor like this" is a fabrication unless you saw it load. If you need an image, harvest a real URL OR ask the user. **A page that looks complete with broken images is worse than a sparser page with only real ones.**
+
+**Image URL verification gate (HARD FAIL before MCP save):** before calling any save tool, run a HEAD or fetch check on every `<img src>` and every CSS `background-image: url(...)` in the page. Any URL returning 4xx, 5xx, DNS failure, or timeout is removed from the page (delete the `<img>` tag or replace with a real harvested URL or — if nothing real is available — ask the user). The page does not ship with broken images. The check covers harvested images, logos, background images, and decorative graphics. The Logo Verification name-check rules still apply on top of this URL-resolves check.
+
 ### Icons
 
 **NEVER use emoji as icons** (no 🚀 💡 ⚡ 📊). They look cheap and render inconsistently.
@@ -559,7 +570,8 @@ No dead buttons. No `href="#"`. No `javascript:void(0)`. Every visible control p
 ### Save Flow
 
 1. Build the HTML file locally. QA it.
-2. **Present a short post-build status.** No section-by-section summary — the structure was already approved in the Structure Preview before build. Just a short status line + save popup. Write something like:
+2. **Image URL verification gate (HARD FAIL).** Before any user-facing checkpoint, run a HEAD or fetch check on every `<img src>` and every CSS `background-image: url(...)` in the page. Any URL returning 4xx, 5xx, DNS failure, or timeout is broken — remove it (delete the `<img>` tag, or replace with a real harvested URL, or ask the user for one). Do not show the page to the user with broken images. This gate runs in addition to the Logo Verification name-check rules; both must pass.
+3. **Present a short post-build status.** No section-by-section summary — the structure was already approved in the Structure Preview before build. Just a short status line + save popup. Write something like:
 
    > Done — page is in the preview panel. Take a look.
    >

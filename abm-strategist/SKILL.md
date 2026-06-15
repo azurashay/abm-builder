@@ -386,14 +386,14 @@ Structure rules:
 **MANDATORY ORDER — do not skip steps:**
 
 1. **Print the full brief** as a blockquote in the chat (visible to the user).
-2. Write one inline closing line: *"Tell me what you think — say **'build'** to hand off to the designer, or describe what to change. (You can also click an option below.)"*
+2. Write one inline closing line: *"Tell me what you think — say **'continue'** to see the page plan, or describe what to change. (You can also click an option below.)"*
 3. THEN call `AskUserQuestion` as a backup approval mechanism.
 
 The popup question text explicitly references "the brief above" — so the brief MUST be visible above the popup. If you call `AskUserQuestion` and the brief blockquote is not in your assistant message, the question text makes no sense to the user.
 
 The flow accepts EITHER response:
-- User types "build" → handoff immediately
-- User clicks "Looks good — build it" → handoff immediately
+- User types "continue" → proceed to Structure Preview (next step in the strategist, not yet a designer handoff)
+- User clicks "Looks good — show me the plan" → proceed to Structure Preview
 - User types text or clicks other options → fold the addition into the brief and confirm in one line
 
 Call `AskUserQuestion` with this exact shape:
@@ -403,7 +403,7 @@ question: "What do you think about the brief above?"
 header: "Brief checkpoint"
 multiSelect: false
 options:
-  - { label: "Looks good — build it", description: "Hand off to the designer" }
+  - { label: "Looks good — show me the plan", description: "Approve the brief and see the page structure" }
   - { label: "Add custom assets", description: "ROI artifact, video, document" }
   - { label: "Tweak the wording", description: "Banned language, framing, competitor mentions" }
 ```
@@ -412,8 +412,8 @@ options:
 
 Checkpoint rules:
 
-- **Never print an inline "anything to add?" text question** — the popup IS the checkpoint. Inline text and the popup together feel duplicative.
-- **"Looks good — build it"** → proceed to the **Structure Preview** step (see next section), NOT a direct handoff. The structure preview is a mandatory step before the page-designer is invoked.
+- **The inline closing line IS part of the deliverable** — it must appear directly after the brief blockquote, before the popup is called. This gives the user a text-typing path ("continue") and explains the popup choice.
+- **"Looks good — show me the plan"** (or user typing "continue") → proceed to the **Structure Preview** step (see next section), NOT a direct handoff. The structure preview is a mandatory step before the page-designer is invoked.
 - Any other choice (or "Other" with free text) → fold the addition into the working brief and confirm in one line — no need to re-present the whole brief.
 - If the user already approved in the same message that triggered the brief, skip the popup but still run the Structure Preview.
 
@@ -458,9 +458,9 @@ Using the brief — Hook + Mechanism + 3 axes + Likely buyer + Economic shape �
 
 **MANDATORY ORDER — do not skip steps:**
 
-1. Write one warm sentence ("Here's the page I'm planning — tell me what to change").
+1. Write one warm sentence ("Here's the page structure I want to design — let me know if it works").
 2. **Print the full Page Structure blockquote** as visible text in your assistant message.
-3. Write one inline closing line: *"Say **'build'** to hand off to the designer, or tell me what to change. (You can also click an option below.)"*
+3. Write one inline closing line: *"Say **'design it'** to hand off to the designer, or tell me what to change. (You can also click an option below.)"*
 4. THEN call `AskUserQuestion` as a backup approval mechanism.
 
 Use this exact shape for the blockquote:
@@ -480,8 +480,8 @@ Bold the section name, 1-1.5 lines of STORY (not UI). All in scroll order.
 The popup question text explicitly references "the structure above" — so the structure MUST be visible above the popup. If you call `AskUserQuestion` and the structure blockquote is not in your assistant message, the question makes no sense.
 
 The flow accepts EITHER response:
-- User types "build" → hand off to designer immediately
-- User clicks "Looks good — build it" → hand off to designer immediately
+- User types "design it" → hand off to designer immediately
+- User clicks "Looks good — start designing" → hand off to designer immediately
 - Other choice (typed or clicked) → adjust the plan, re-render the blockquote, and call `AskUserQuestion` again
 
 ### Then call `AskUserQuestion` for approval:
@@ -491,7 +491,7 @@ question: "Does the structure above feel right?"
 header: "Structure check"
 multiSelect: false
 options:
-  - { label: "Looks good — build it", description: "Hand off to the designer to build" }
+  - { label: "Looks good — start designing", description: "Hand off to the designer to build the page" }
   - { label: "Tweak a section", description: "Change one section's idea or position" }
   - { label: "Add or remove a section", description: "Rebalance the arc" }
 ```
@@ -500,8 +500,8 @@ options:
 
 ### Loop until approved
 
-- **Looks good — build it** → hand off **immediately** to the page-designer skill. The approved structure (and the full brief) inherits into the conversation. Designer reads it and builds directly.
-- Any other choice → adjust the plan, re-render the blockquote with the change, and call `AskUserQuestion` again. Loop until "Looks good".
+- **"Looks good — start designing"** (or user typing "design it") → hand off **immediately** to the page-designer skill. The approved structure (and the full brief) inherits into the conversation. Designer reads it and builds directly.
+- Any other choice → adjust the plan, re-render the blockquote with the change, and call `AskUserQuestion` again. Loop until approved.
 
 **No designer invocation happens before the structure is approved.**
 
@@ -515,7 +515,7 @@ Hold the full brief — every section under Brief Structure above — in your wo
 
 ## Handoff
 
-The handoff happens **automatically** when the user picks "Looks good — build it" in the **Structure Preview** popup (not the earlier brief checkpoint). **Never** print a "Brief is ready, say build" message or any other handoff prose — the popup choice IS the trigger. Once the user picks that option, immediately invoke the `abm-page-designer` skill (the full Brief Structure and the approved Page Structure stay in the conversation; the designer reads both directly and builds from them).
+The handoff happens **automatically** when the user picks "Looks good — start designing" in the **Structure Preview** popup (or types "design it" inline) — not the earlier brief checkpoint. **Never** print a "Brief is ready, say build" message or any other handoff prose — the popup choice IS the trigger. Once the user picks that option, immediately invoke the `abm-page-designer` skill (the full Brief Structure and the approved Page Structure stay in the conversation; the designer reads both directly and builds from them).
 
 Do not attempt to build, design, or deploy anything yourself. That is the next skill's job. Your job ends at the Structure Preview checkpoint.
 

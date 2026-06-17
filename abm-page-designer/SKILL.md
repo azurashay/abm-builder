@@ -27,6 +27,8 @@ Read the campaign brief AND the approved page structure before doing anything:
 
 The brief is your creative constraint. The structure is your section plan. Do not re-research the account, do not rewrite the messaging, do not re-plan sections. Build what the strategist defined.
 
+**Internal intent never appears on the page.** The marketer's goal — "upsell", "renewal", "displace the incumbent", "drive expansion", "promote X", "get them to a demo" — and any strategic note from the brief or the original prompt is SELLER-SIDE context. It steers your angle, copy, and CTA, but it is never rendered as visible text, alt text, a heading, a caption, or a tag on the page. The buyer must never read the seller's motive. Before saving, scan the page for leaked intent language ("this board is to...", "created to upsell", "for the renewal play", internal goal phrasing) and remove it. A buyer-facing page that exposes the internal goal is a hard QA fail.
+
 See **"Input — The Approved Structure"** below for the depth division between the two skills.
 
 ## Step 1 — Theme Decision (BEFORE brand capture)
@@ -197,9 +199,13 @@ A logo that loads is not a verified logo. CDN URLs harvested from a page (e.g. `
 - **Do not trust a harvested mapping for a buyer-facing named logo.** Showing the wrong company's logo to the target account is a credibility-killer. If you cannot name-verify a customer logo, drop it — a smaller wall of correct logos beats a larger wall with one wrong mark.
 - **If the marketer provided a logo URL or asset in the brief, use that.** Their named asset overrides any harvest. Do not "improve" on it.
 - **Dead ends to know**: the Clearbit logo API (`logo.clearbit.com/<domain>`) is deprecated and fails. Wikimedia `Special:FilePath` is reliable and avoids guessing CDN hash paths.
-- **Color fit**: check the logo's fill against its background. White-fill logos vanish on light backgrounds; dark logos vanish on dark. Grayscale-with-color-on-hover treatment works for full-color logos.
+- **Color fit (visibility — a loaded logo that you can't see is a fail):** every logo must be legible against the surface it sits on. The Nutanix failure mode: a white-fill logo placed on a light/white background — it loads fine (`naturalWidth > 0`) but is invisible. Check each logo's actual fill color against its actual background:
+  - White / light-fill logo on a light surface → vanishes. Fix: place it in a dark container/chip, OR use the dark-fill variant of the logo, OR invert it (`filter: brightness(0)` for a solid dark version).
+  - Dark / black-fill logo on a dark surface → vanishes. Fix: light container, light variant, or `filter: brightness(0) invert(1)`.
+  - Full-color logo: usually fine on white; on dark, check it doesn't disappear, and consider a white container.
+  - When unsure of a logo's fill, assume the worst and give it a contrasting container. A logo behind a clean contrasting chip always beats an invisible one floating on a matching background.
 
-**Verification gate (HARD FAIL):** if any named logo or named customer appears on the page without a name-verified source, the page does not ship. Drop the element before saving to MCP.
+**Verification gate (HARD FAIL):** before saving to MCP, every logo on the page must pass BOTH: (1) name-verified source (correct company), and (2) **visible against its background** (legible, not white-on-white or dark-on-dark). A logo that fails either check is dropped or fixed — never shipped invisible or wrong.
 
 ## Design Philosophy
 
@@ -623,6 +629,7 @@ Run before presenting to the user and again before MCP save.
 - [ ] At least one full section is LED by a real harvested image (not text-plus-icon)
 - [ ] Image density matches the vendor's brand (dense for image-rich vendors, restrained for minimal ones) — but never zero
 - [ ] All images via URL — zero base64
+- [ ] **Every logo is visible against its background** — no white-on-white or dark-on-dark. Each logo checked for fill-vs-surface contrast; invisible logos get a contrasting container, a different variant, or a filter inversion.
 - [ ] All icons are inline SVG — no emoji, no icon fonts
 - [ ] At least 2 different layout patterns (no repeated grids)
 - [ ] One signature interactive moment (calculator, tabs, slider, etc.)
@@ -636,6 +643,7 @@ Run before presenting to the user and again before MCP save.
 - [ ] Every named logo (target account + customers) is name-verified, not just loading — wrong logo = dropped
 - [ ] CTA labels are outcomes, not "Learn more"
 - [ ] No internal language (demo, template, board, microsite)
+- [ ] **No leaked internal intent** — the seller's goal (upsell, renewal, displacement, expansion, "this board is to...", "created to promote...") appears NOWHERE in visible copy, headings, captions, alt text, or tags. The buyer never sees the seller's motive.
 - [ ] No filler words (unlock, leverage, empower, seamless, robust)
 - [ ] No em dashes ("—") in any visible page copy. Use a hyphen ("-") instead, or rewrite the sentence. This applies to all on-page text: headlines, body, labels, captions.
 

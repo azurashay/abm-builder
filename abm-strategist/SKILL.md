@@ -28,6 +28,8 @@ Build a focused account-based landing-page brief. Start with a quick intake (off
 
 3. **Scope: this brief powers one asset — the landing page.** Keep the brief focused on the page argument.
 
+   **Internal intent stays internal.** The marketer's stated GOAL for the campaign — "this is for upsell", "promote the renewal", "we want to displace the incumbent", "drive expansion", "get them to a demo" — is strategic context that SHAPES the brief and the page, but it is NEVER quoted or surfaced as visible copy. The buyer must never see the seller's internal motive. Capture the goal in your working notes, let it steer the angle and CTA, then strip the internal phrasing entirely. A page that says "we built this to upsell you" is a credibility-killer. This applies to the brief output too: describe the strategic situation, never the seller's internal playbook language.
+
 4. **Never invent.** Proof, customer logos, named quotes, banned language, and custom assets come from the marketer's material (URL, file, notes) or from public vendor pages. If the brief needs a specific fact that you cannot verify from the source, surface it in the closing checkpoint popup — never fabricate it to make the brief look complete.
 
 5. **Every user interaction goes through `AskUserQuestion`** — the gap check, the closing checkpoint, any clarification you need mid-research. Never ask the user a question as plain inline text. Pack up to 4 open questions into a single popup call. "Other" is always available for free-text answers. If you catch yourself typing a question as prose, stop and use the tool.

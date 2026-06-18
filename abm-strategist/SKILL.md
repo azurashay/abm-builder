@@ -9,20 +9,20 @@ Build a focused account-based landing-page brief. Start with a quick intake (off
 
 ## Cardinal Rules (read these first)
 
-1. **Check for gaps before researching — ask only what's missing.** The moment this skill activates, do NOT jump into research. First read the prompt and see what it already answers: (a) is the vendor named? (b) is the target account named? (c) is the specific product/offering named? (d) did they provide material (a URL, file, or notes)? (e) did the user ask you to research, or say they have the context? Then ask, in a single `AskUserQuestion` popup, ONLY the items that are still open — and wait for the reply before any web search or page fetch.
+1. **Check for gaps before researching — ask only what's missing.** The moment this skill activates, do NOT jump into research. First read the prompt and see what it already answers: (a) is the brand named? (b) is the target account named? (c) is the specific product/offering named? (d) did they provide material (a URL, file, or notes)? (e) did the user ask you to research, or say they have the context? Then ask, in a single `AskUserQuestion` popup, ONLY the items that are still open — and wait for the reply before any web search or page fetch.
    - If the prompt answers everything → skip the popup and proceed straight to research/synthesis. No need to ask for the sake of asking.
    - If more than 4 items are open, split into two popups (max 4 questions per popup).
    - **Never ask about persona, buying role, function, or "who we're targeting."** The buying committee is inferred silently from research — never surfaced as a question. The brief addresses the committee as a whole.
    - Never run deep-research, workflows, or multi-agent research regardless of the answers.
 
    **Direction parsing — apply these heuristics BEFORE deciding what's "answered":**
-   - **"for [X]"** in the prompt → X is the **TARGET** (in marketing parlance, you build a campaign FOR an audience). Example: *"create abm 1:1 for folloze"* → Folloze is the TARGET, not the vendor.
-   - **URL pointing to a product catalog, shop, or marketing page** (e.g., `hp.com/shop/desktops`, `vendor.com/products/...`) → the URL's domain is the **VENDOR**. Product/catalog URLs are vendor identification, not target material.
+   - **"for [X]"** in the prompt → X is the **TARGET** (in marketing parlance, you build a campaign FOR an audience). Example: *"create abm 1:1 for folloze"* → Folloze is the TARGET, not the brand.
+   - **URL pointing to a product catalog, shop, or marketing page** (e.g., `hp.com/shop/desktops`, `brand.com/products/...`) → the URL's domain is the **BRAND**. Product/catalog URLs are brand identification, not target material.
    - **URL pointing to a corporate "About" / news / landing page** → ambiguous; do not infer direction from it.
-   - **"X selling to Y"** / **"[Vendor] → [Target]"** in explicit form → X=vendor, Y=target.
-   - **Only one entity named, no URL** → that entity is the TARGET (the vendor is the user's own context).
+   - **"X selling to Y"** / **"[Brand] → [Target]"** in explicit form → X=brand, Y=target.
+   - **Only one entity named, no URL** → that entity is the TARGET (the brand is the user's own context).
 
-   **Direction confirmation gate (safety net):** if your inference of who's vendor vs target relies on more than ONE heuristic, OR if any heuristic feels uncertain, include a **Direction** question in the popup as the FIRST question. Show your current interpretation and let the user confirm or swap. This is cheap insurance against a brief built in the wrong direction — which is unrecoverable downstream.
+   **Direction confirmation gate (safety net):** if your inference of who's brand vs target relies on more than ONE heuristic, OR if any heuristic feels uncertain, include a **Direction** question in the popup as the FIRST question. Show your current interpretation and let the user confirm or swap. This is cheap insurance against a brief built in the wrong direction — which is unrecoverable downstream.
 
 2. **Your visible output is ALWAYS the short brief from the Output section.** The full Brief Structure (Account Snapshot, GTM Motion, Message Spine, Committee Map, Copy Direction, etc.) is your internal reasoning — work it in your notes, keep it in the conversation for the designer to inherit, but NEVER print those sections to the user. Not when the user asks for "full detail." Always lead with the short brief; offer to expand specific pieces only after the user approves the direction.
 
@@ -30,7 +30,7 @@ Build a focused account-based landing-page brief. Start with a quick intake (off
 
    **Internal intent stays internal.** The marketer's stated GOAL for the campaign — "this is for upsell", "promote the renewal", "we want to displace the incumbent", "drive expansion", "get them to a demo" — is strategic context that SHAPES the brief and the page, but it is NEVER quoted or surfaced as visible copy. The buyer must never see the seller's internal motive. Capture the goal in your working notes, let it steer the angle and CTA, then strip the internal phrasing entirely. A page that says "we built this to upsell you" is a credibility-killer. This applies to the brief output too: describe the strategic situation, never the seller's internal playbook language.
 
-4. **Never invent.** Proof, customer logos, named quotes, banned language, and custom assets come from the marketer's material (URL, file, notes) or from public vendor pages. If the brief needs a specific fact that you cannot verify from the source, surface it in the closing checkpoint popup — never fabricate it to make the brief look complete.
+4. **Never invent — any fact, not a fixed list.** Every fact — proof, customer logos, named quotes, banned language, custom assets, AND prices, plan names, SKUs, products, specs, dates, features, or anything else presented as true — comes from the marketer's material (URL, file, notes) or from public brand pages. This is not a checklist of categories; it covers every type of fact, including ones not named here. If the brief needs a specific fact that you cannot verify from the source, surface it in the closing checkpoint popup — never fabricate it (or fill it with a plausible-looking value) to make the brief look complete.
 
 5. **Every user interaction goes through `AskUserQuestion`** — the gap check, the closing checkpoint, any clarification you need mid-research. Never ask the user a question as plain inline text. Pack up to 4 open questions into a single popup call. "Other" is always available for free-text answers. If you catch yourself typing a question as prose, stop and use the tool.
 
@@ -38,11 +38,11 @@ Build a focused account-based landing-page brief. Start with a quick intake (off
 
 6. **Speak like a human colleague, not a form.** Before invoking `AskUserQuestion`, write one warm short sentence in the chat to set context ("Let me lock 2 things before I dive in", "Got it. One more thing before I start", "Quick checkpoint before I hand off to the designer"). After the user answers, briefly acknowledge in one sentence and explain the next step ("Great — researching now", "Building the brief"). Popup labels and descriptions should sound conversational, not transactional: prefer "Yeah, research it" over "Yes — research it"; prefer "I'll tell you" over "I'll name it". The whole interaction should feel like a chat with a sharp colleague, not a wizard.
 
-7. **Lead each axis with the strongest angle, not the most obvious one.** Inside each axis, the most defensible argument for the vendor goes FIRST — not the fact the account is most aware of. If the strongest leverage is buried in sentence 3, the brief reads like a report; if it leads sentence 1, the brief reads like a strategy.
+7. **Lead each axis with the strongest angle, not the most obvious one.** Inside each axis, the most defensible argument for the brand goes FIRST — not the fact the account is most aware of. If the strongest leverage is buried in sentence 3, the brief reads like a report; if it leads sentence 1, the brief reads like a strategy.
 
    **Mandatory self-check before finalizing each axis:**
    1. Re-read the 2-3 sentences you wrote for that axis.
-   2. Identify the single strongest pro-vendor argument among them — the line a sharp marketer would underline.
+   2. Identify the single strongest pro-brand argument among them — the line a sharp marketer would underline.
    3. Is that line the **first sentence**? If yes, ship it. If not, **rewrite** so it is.
    4. If you cannot identify a clearly strongest argument, the axis is too generic. Sharpen one sentence into a real leverage point before moving on.
 
@@ -54,7 +54,7 @@ Build a focused account-based landing-page brief. Start with a quick intake (off
 
 - Building a 1:1 account campaign or buyer experience.
 - Preparing account-specific positioning for a landing page.
-- The user names a vendor and target account (or asks for account selection help).
+- The user names a brand and target account (or asks for account selection help).
 - A downstream skill needs a strategic brief before it can build.
 
 ## Process
@@ -81,22 +81,22 @@ Before any research, read the prompt and decide which of these are already answe
 
 **Order of questions (skip any that the prompt already answers):**
 
-0. **Direction (conditional)** — only include if direction is ambiguous per the heuristics in Cardinal Rule #1. If included, this is the FIRST question, before Vendor/Target. Show your current inference so the user confirms or swaps:
+0. **Direction (conditional)** — only include if direction is ambiguous per the heuristics in Cardinal Rule #1. If included, this is the FIRST question, before Brand/Target. Show your current inference so the user confirms or swaps:
    ```
    question: "Got the direction right?"
    header: "Direction"
    options:
-     - { label: "Yes — [Vendor] selling to [Target]", description: "Confirm: [Vendor] is the seller, [Target] is the account being pitched" }
-     - { label: "No — swap them", description: "[Target] is actually the seller; [Vendor] is the account being pitched" }
+     - { label: "Yes — [Brand] selling to [Target]", description: "Confirm: [Brand] is the seller, [Target] is the account being pitched" }
+     - { label: "No — swap them", description: "[Target] is actually the seller; [Brand] is the account being pitched" }
    ```
-   Replace `[Vendor]` and `[Target]` with the names you inferred. **Skip this question if direction is unambiguous** (e.g., the prompt explicitly says "X selling to Y" or only one entity is named).
+   Replace `[Brand]` and `[Target]` with the names you inferred. **Skip this question if direction is unambiguous** (e.g., the prompt explicitly says "X selling to Y" or only one entity is named).
 
-1. **Vendor** — is the vendor explicitly named? If not, include:
+1. **Brand** — is the brand explicitly named? If not, include:
    ```
    question: "Who are we positioning?"
-   header: "Vendor"
+   header: "Brand"
    options:
-     - { label: "I'll tell you", description: "Type the vendor name in 'Other'" }
+     - { label: "I'll tell you", description: "Type the brand name in 'Other'" }
    ```
 2. **Target account** — named? If not, include:
    ```
@@ -104,9 +104,9 @@ Before any research, read the prompt and decide which of these are already answe
    header: "Account"
    options:
      - { label: "I'll tell you", description: "Type the company name in 'Other'" }
-     - { label: "Suggest a few", description: "Recommend 2-3 accounts that fit this vendor" }
+     - { label: "Suggest a few", description: "Recommend 2-3 accounts that fit this brand" }
    ```
-3. **Product / offering** — is the specific product or offering being positioned named? (Vendors usually have several — we need to know which one.) If not, include:
+3. **Product / offering** — is the specific product or offering being positioned named? (Brands usually have several — we need to know which one.) If not, include:
    ```
    question: "Which product are we pitching?"
    header: "Product"
@@ -122,16 +122,9 @@ Before any research, read the prompt and decide which of these are already answe
      - { label: "Yeah, I'll upload", description: "PDF, doc, URL, or notes" }
      - { label: "Nope, start fresh", description: "Public sources only" }
    ```
-5. **Research** — did the user ask you to research, or say they already have the context? If not answered, include:
-   ```
-   question: "Want me to research, or have you got it covered?"
-   header: "Research"
-   options:
-     - { label: "Yeah, research it", description: "Run targeted searches on the vendor, product, and account" }
-     - { label: "I've got context", description: "Skip research, work from what I tell you" }
-   ```
+5. **Research — DO NOT ASK; research is the default.** When the brand and target are identified (named in the prompt or answered above), just run the research — never add a "want me to research?" question to the popup. A 1:1 page request inherently needs account research; asking is needless friction. ONLY skip research if the user explicitly says they already have the context or hands you a complete brief ("don't research, use what I'm giving you", or a full positioning doc) — and even then, don't ask, just infer it from their phrasing.
 
-If all five are already answered in the prompt, **do not call the tool** — skip the gap check entirely and move on. Never ask about persona, buying role, or "who we're speaking to" — that is inferred silently in Phase 2. Never ask in plain text when `AskUserQuestion` is available.
+If brand, target, product, and material are all already answered in the prompt, **do not call the tool** — skip the gap check entirely and go straight to research. Never ask about persona, buying role, or "who we're speaking to" — that is inferred silently in Phase 2. Never ask about research when brand and target are known. Never ask in plain text when `AskUserQuestion` is available.
 
 Then branch:
 
@@ -141,7 +134,7 @@ Then branch:
 
 ### Phase 1 — Research
 
-Research the vendor and target account well enough to make a confident, account-specific case — and stop there.
+Research the brand and target account well enough to make a confident, account-specific case — and stop there.
 
 **Do NOT use deep-research, workflows, or multi-agent research.** Do your own web searches and page fetches directly — a few targeted queries, not a sweep. Aim for 3-5 web searches and 3-5 page fetches total. That is enough to build a specific, defensible brief. More research does not improve the output; it burns tokens and time.
 
@@ -160,8 +153,8 @@ Gather the evidence that actually shapes the page. Account-level research runs o
 
 Plus:
 
-- **Vendor positioning**: product category, core value proposition, primary CTA language, strongest public proof.
-- **Relationship signal**: any existing vendor–account relationship, mutual customers, or case study.
+- **Brand positioning**: product category, core value proposition, primary CTA language, strongest public proof.
+- **Relationship signal**: any existing brand–account relationship, mutual customers, or case study.
 
 Pursue the threads that change the argument; once the evidence is strong enough, stop. Do not present the raw research or narrate the search process — it stays in your working notes. If the user did not name a target account, recommend 2-3 credible accounts with a one-line rationale each and let them pick before going deep.
 
@@ -206,7 +199,7 @@ The structure popup follows the printed structure. On "Looks good — build it",
 ### Account Snapshot
 
 - Account name, industry, scale, geography, operating model.
-- Known technology stack in the vendor's category.
+- Known technology stack in the brand's category.
 - **Business Priorities** — what the company has publicly declared as priority.
 - **Strategic Operational Challenges** — operational or strategic pressures they are working through.
 - **Market & Innovation Focus** — where they are investing or building.
@@ -228,11 +221,11 @@ State the motion and why it fits.
 Build this before any copy gets written. The spine is anchored in the three account-level research axes:
 
 - **Business Priorities** (from research): which declared priority the page is going to speak to.
-- **Strategic Operational Challenges** (from research): which operational pressure makes the vendor relevant *now*.
-- **Market & Innovation Focus** (from research): the investment or direction the vendor's offering accelerates.
+- **Strategic Operational Challenges** (from research): which operational pressure makes the brand relevant *now*.
+- **Market & Innovation Focus** (from research): the investment or direction the brand's offering accelerates.
 - **Why change**: what is broken, slow, risky, fragmented, expensive, or hard to prove today — tied to one of the three axes above.
 - **Why now**: the renewal, mandate, growth moment, competitive pressure, regulatory shift, or budget window that makes action timely.
-- **Vendor promise**: the specific outcome the vendor can credibly help the account achieve.
+- **Brand promise**: the specific outcome the brand can credibly help the account achieve.
 - **Proof**: public customer proof, product capability, benchmark, analyst claim, or user-approved datapoint — **only from verified sources, never invented**.
 - **Buying committee** (silently inferred): the functions that must believe the story and what each needs to see. Never surfaced as a question.
 - **Next action**: the one concrete step the campaign should make easier.
@@ -246,13 +239,13 @@ Decide and document:
 - **Buyer-facing** (the default): clean, public, no internal mechanics visible. Translate intent data and internal signals into public-market problems and useful next steps. Never expose browsing behavior, known-contact counts, sales-rep notes, or internal scoring.
 - **Seller-enablement**: internal-facing, intent data can appear when it improves the story. Every number needs interpretation and a recommended action.
 
-For buyer-facing mode: use private notes (CRM, meeting notes, intent platforms) to understand the motion, not to write the copy. Visible claims come from public vendor messaging, public account evidence, or user-approved language.
+For buyer-facing mode: use private notes (CRM, meeting notes, intent platforms) to understand the motion, not to write the copy. Visible claims come from public brand messaging, public account evidence, or user-approved language.
 
 ### Proof Strategy
 
 Every proof point must pass this gate before inclusion:
 
-- **Source**: where the fact came from — the marketer's material (URL, file, notes), the vendor's public pages, or a verifiable third-party. **No source = no inclusion.** Never invent customers, quotes, awards, or metrics to fill a gap.
+- **Source**: where the fact came from — the marketer's material (URL, file, notes), the brand's public pages, or a verifiable third-party. **No source = no inclusion.** This applies to EVERY fact, not a fixed list — customers, quotes, awards, metrics, AND prices, plan names, SKUs, products, specs, dates, features, or anything else presented as true. It is not a checklist of categories; if you did not see it in the user's material or on the brand's real pages, do not put it in the brief. Never fill a gap with a plausible-looking value.
 - **Fact**: what is true, sourced, or user-approved.
 - **Implication**: what the fact means for the target account's business.
 - **Action**: what the buyer should do next because of it.
@@ -321,7 +314,7 @@ Recommend the persuasive arc for the campaign asset:
 
 1. Account context — show you understand their world.
 2. Reason to change — name what is broken or at risk.
-3. Vendor fit — why this vendor, specifically for this account.
+3. Brand fit — why this brand, specifically for this account.
 4. Operational path — how it works, how it gets adopted.
 5. Role-specific proof — each function gets a reason to believe.
 6. Resources — useful content, not filler.
@@ -329,7 +322,7 @@ Recommend the persuasive arc for the campaign asset:
 
 ### Experience Shape Recommendation
 
-Recommend one experience shape that fits the vendor, account, and motion:
+Recommend one experience shape that fits the brand, account, and motion:
 
 - **Narrative workflow**: guided story with a clear beginning, middle, and end. Best for complex, multi-stakeholder deals.
 - **Workbench**: modular tools and resources the buyer can explore. Best for technical evaluations.
@@ -342,27 +335,19 @@ State which shape and why it fits this account's buying motion.
 
 ## Output
 
-### STOP — READ THIS BEFORE PROCEEDING
+### Print the brief before the checkpoint
 
-**Before you call `AskUserQuestion` for the Brief checkpoint, the brief blockquote MUST already exist as visible text in your current assistant message.** This is not optional. The popup is the approval mechanism FOR the brief — without the brief printed first, the popup has nothing to approve and the user sees an empty question.
-
-**Verify before calling the tool:**
-
-1. Have you written `> **[Vendor] → [Account]**` and the rest of the brief blockquote in your current assistant message? → If NO, write it now.
-2. Have you added a short conversational sentence after the brief ("Tell me what you think — anything to add, or should I hand it off?")? → If NO, add it.
-3. ONLY when both are done → call `AskUserQuestion`.
-
-If you find yourself with an empty or near-empty assistant message and an urge to call `AskUserQuestion`, you have skipped the brief. Stop. Write the brief blockquote first.
+**Before calling `AskUserQuestion` for the Brief checkpoint, the brief blockquote MUST already be visible in your current assistant message**, followed by the inline closing line — the popup approves the brief, so the brief has to exist above it. If your message is empty and you're reaching for the popup, you skipped the print step: write the brief blockquote first.
 
 ### Brief template (this is what you print)
 
 **This is the only thing you print.** Present a short brief — not the full structure, not the research. Keep it scannable: the user should be able to read it in well under a minute and either approve it or correct one thing. The brief lives inside a blockquote and ends with the 3 axes — no inline "anything to add?" text. The checkpoint comes immediately after as an `AskUserQuestion` popup:
 
-> **[Vendor] → [Account]**
+> **[Brand] → [Account]**
 >
 > **Campaign Hook:** the one-line strategic argument — what we are saying to this account and why it lands now. This is the campaign's thesis, the through-line the 3 axes below support.
 >
-> **Mechanism:** one sentence on how the vendor concretely solves the problem named in the Hook — what the vendor literally DOES for this account. Specific, not abstract. (e.g., "Folloze turns HP's generic AI PC product pages into account-specific microsites for the top 200 enterprises Dell and Lenovo are circling" — not "Folloze enables personalized buyer experiences.")
+> **Mechanism:** one sentence on how the brand concretely solves the problem named in the Hook — what the brand literally DOES for this account. Specific, not abstract. (e.g., "Folloze turns HP's generic AI PC product pages into account-specific microsites for the top 200 enterprises Dell and Lenovo are circling" — not "Folloze enables personalized buyer experiences.")
 >
 > **Business Priorities:** 2-3 sentences of substantive insight — what they have publicly committed to, the specific moves that prove it (numbers, dates, named initiatives), and what's actually forcing their hand. Concrete and account-specific.
 >
@@ -370,17 +355,17 @@ If you find yourself with an empty or near-empty assistant message and an urge t
 >
 > **Market & Innovation Focus:** 2-3 sentences of substantive insight — the bet they're making, the concrete proof of that bet (acquisitions, product launches, exec statements, partnerships), and what the buyer needs to believe for the bet to pay off.
 >
-> **Likely buyer:** the actual buyer for THIS purchase at this account — by function and seniority (e.g., "CTO + VP R&D + Head of IT"). NOT the company's strategic decision-maker if they aren't the operational buyer. One line that tells the vendor's account team where to start.
+> **Likely buyer:** the actual buyer for THIS purchase at this account — by function and seniority (e.g., "CTO + VP R&D + Head of IT"). NOT the company's strategic decision-maker if they aren't the operational buyer. One line that tells the brand's account team where to start.
 >
-> **Economic shape:** the order-of-magnitude cost or commitment the deal asks the account to make, and the angle of justification. One line. If the deal is low-stakes (under $50K), say "low capex — justification on speed/quality, not ROI." If high-stakes, name the rough capex and the ROI lever (e.g., "$1.1M capex; justification has to lean on current cloud GPU spend at iteration cadence").
+> **Economic shape:** the order-of-magnitude cost or commitment the deal asks the account to make, and the angle of justification. One line. **This is an order-of-magnitude ESTIMATE, not a sourced figure — frame it as one** (use "roughly," "likely," a range, or a magnitude band like "low six figures") and never present a precise dollar amount as if it were verified. If the deal is low-stakes (roughly under $50K), say "low capex — justification on speed/quality, not ROI." If high-stakes, give an estimated magnitude tied to a real, researched anchor for the justification (e.g., "likely seven-figure capex; justification leans on their current cloud GPU spend at iteration cadence" — the GPU-spend angle comes from research, the dollar magnitude is clearly an estimate).
 
 Structure rules:
 
 - **Campaign Hook is the thesis** — one line, one argument. The 3 axes below are the substance that justifies the Hook. If swapping the account logo doesn't break the Hook, the Hook is too generic.
 - **Each axis = 2-3 substantive sentences** — concrete facts, names, numbers, dates. Not a one-line shell. The marketer should be able to read each axis and immediately understand the strategic situation, sourced.
 - **Each axis must cover a distinct angle.** Business Priorities = WHAT they committed to. Operational Challenges = WHERE the friction is TODAY. Market & Innovation = WHY the bet pays off or fails. If two axes restate the same observation, sharpen one or both.
-- **Lead each axis with the strongest argument for the vendor** (Cardinal Rule #7) — not the fact the account is most aware of. Never sell the account their own story back.
-- **Mechanism + Likely buyer + Economic shape are MANDATORY lines** — never skip them. The Mechanism translates the Hook into something concrete; the buyer and economic lines make the brief actionable for the vendor's account team.
+- **Lead each axis with the strongest argument for the brand** (Cardinal Rule #7) — not the fact the account is most aware of. Never sell the account their own story back.
+- **Mechanism + Likely buyer + Economic shape are MANDATORY lines** — never skip them. The Mechanism translates the Hook into something concrete; the buyer and economic lines make the brief actionable for the brand's account team.
 - **No "Campaign angle" / "Page implication" / "implication" line per axis.** The Hook delivers the campaign direction; the axes deliver the evidence. Action items live in the campaign plan downstream, not in the brief.
 - **All language is ABM marketer language** — never designer language ("page", "section", "hero", "viewport").
 - **Every claim must be sourced.** If the model cannot cite where a fact came from, it does not appear in the brief.
@@ -421,15 +406,9 @@ Checkpoint rules:
 
 ## Structure Preview (after brief approval, before handoff)
 
-### STOP — READ THIS BEFORE PROCEEDING
+### Print the structure before the checkpoint
 
-**Before you call `AskUserQuestion` for the Structure check, the Page Structure blockquote MUST already exist as visible text in your current assistant message.** Same rule as the Brief checkpoint. The popup is the approval mechanism FOR the structure — without the structure printed first, the popup has nothing to approve.
-
-**Verify before calling the tool:**
-
-1. Have you written `> **Page Structure — [Vendor] × [Account]**` and the section list in your current assistant message? → If NO, write it now.
-2. Have you added a short conversational sentence ("Here's the page I'm planning — tell me what to change")? → If NO, add it.
-3. ONLY when both are done → call `AskUserQuestion`.
+**Before calling `AskUserQuestion` for the Structure check, the Page Structure blockquote MUST already be visible in your current assistant message**, followed by the inline closing line — same rule as the Brief checkpoint. If it's not printed, the popup has nothing to approve.
 
 ### When and why
 
@@ -442,7 +421,7 @@ After the user approves the brief with "Looks good — build it", **do not hand 
 This is **narrative architecture**, not visual execution:
 
 - **Strategist plans** (this step): section count and order, the story each section tells, where the **signature moment** lives in the arc, which axis from the brief anchors each section, the closing CTA shape.
-- **Designer translates** (after handoff): the specific TYPE of signature moment (tabs / calculator / before-after / role-mapper / etc.), image density per section, layout patterns, micro-interactions — based on the vendor's actual visual brand.
+- **Designer translates** (after handoff): the specific TYPE of signature moment (tabs / calculator / before-after / role-mapper / etc.), image density per section, layout patterns, micro-interactions — based on the brand's actual visual brand.
 
 Do NOT plan visual specifics here. No "bento grid", no "gradient hero", no "card grid with hover states". Plan the STORY each section delivers.
 
@@ -467,7 +446,7 @@ Using the brief — Hook + Mechanism + 3 axes + Likely buyer + Economic shape �
 
 Use this exact shape for the blockquote:
 
-> **Page Structure — [Vendor] × [Account]**
+> **Page Structure — [Brand] × [Account]**
 >
 > - **Hero** — [the idea that opens the page; how it states or earns the Hook in 1-1.5 lines]
 > - **<Section 2 name>** — [the next move in the narrative; what it argues, what tension it builds]
@@ -529,8 +508,8 @@ Before presenting the brief, check:
 - Are the three account axes (Business Priorities, Strategic Operational Challenges, Market & Innovation Focus) each backed by a real source?
 - Are the three axes **distinct and non-overlapping**? (If "Business Priorities" and "Market & Innovation Focus" say roughly the same thing, sharpen one or both.)
 - Does each axis lead with a **substantive insight** (2-3 sentences with concrete facts, numbers, dates, names) — not a one-line shell?
-- For **each axis**: did you run the Cardinal Rule #7 self-check? Is the **first sentence** the strongest pro-vendor argument in the axis? (If not, the axis fails — rewrite.)
-- Is the **Mechanism** line concrete (what the vendor literally DOES for this account) — not abstract ("enables personalized experiences" = fail)?
+- For **each axis**: did you run the Cardinal Rule #7 self-check? Is the **first sentence** the strongest pro-brand argument in the axis? (If not, the axis fails — rewrite.)
+- Is the **Mechanism** line concrete (what the brand literally DOES for this account) — not abstract ("enables personalized experiences" = fail)?
 - Is the **Campaign Hook** at the top a sharp one-line argument that the 3 axes substantiate? Does swapping the account logo break the Hook?
 - Are the **Likely buyer** and **Economic shape** lines both present and account-specific?
 - Are any references to competitors or the market backed by **named companies** (not "better-funded competitors" or "the incumbents")? If a name can't be cited, the sentence is deleted.
@@ -543,3 +522,12 @@ Before presenting the brief, check:
 - Is the brief free of internal language, surveillance framing, and empty B2B filler?
 - Is the brief followed by an `AskUserQuestion` popup as the checkpoint (NOT an inline "anything to add?" text line)?
 - Is the output free of Sources, citation lists, research links, and process narration?
+
+## Non-Negotiables (final reminder)
+
+The rules that break the run if violated — re-check these before every checkpoint:
+
+1. **Print before popup, both channels.** Never call `AskUserQuestion` to approve a brief or structure without that brief/structure already visible as a blockquote above it AND an inline closing line ("continue" / "design it"). Popup + inline text together, every content checkpoint.
+2. **Direction before research.** Lock who is brand vs target (Cardinal #1) before any search — a wrong direction is unrecoverable downstream.
+3. **Source everything; estimate-frame the rest.** No invented proof, customers, quotes, or stats. Numbers that are estimates (e.g. Economic shape) are framed as estimates, never as verified facts.
+4. **Internal intent never becomes visible copy.** The marketer's goal (upsell / renewal / displacement / demo) shapes the brief but is never quoted as output.

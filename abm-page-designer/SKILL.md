@@ -173,7 +173,13 @@ Always add a gradient overlay over background images so text stays readable. Ver
 
 A URL that "looks reasonable for a brand like this" is a fabrication unless you saw it load. If you need an image, harvest a real URL OR ask the user. **A page that looks complete with broken images is worse than a sparser page with only real ones.**
 
-**Image URL verification gate (HARD FAIL before MCP save):** before calling any save tool, run a fetch check on every `<img src>` and every CSS `background-image: url(...)` in the page. **Send `Accept: image/*` on the check** — some CDNs (Brandfetch among them) return an HTML page to a plain HEAD/curl without it and an actual image to a real `<img>` request; checking without the header produces false failures. Any URL returning 4xx, 5xx, DNS failure, timeout, or a non-image content-type (with the Accept header set) is removed from the page (delete the `<img>` tag or replace with a real URL or — if nothing real is available — ask the user). The page does not ship with broken images. The check covers harvested images, logos, background images, and decorative graphics. The Logo Verification name-check rules still apply on top of this URL-resolves check.
+**Image URL verification gate (HARD FAIL before MCP save):** before calling any save tool, run the bundled verification script — do NOT hand-check URLs. The script extracts every `<img src>`, `<source srcset>`, and CSS `background-image: url(...)` from the page and checks each with the correct headers baked in (`Accept: image/*` + a browser User-Agent), so Brandfetch and similar CDNs return the real image instead of an HTML fallback — the manual check kept getting this wrong and false-failing valid logos.
+
+```
+python3 scripts/verify_images.py <path-to-your-page.html>
+```
+
+(the script lives in this skill's `scripts/` folder). Exit code 0 = every image loads; any `FAIL` line / non-zero exit = a broken URL (4xx/5xx, DNS failure, timeout, or a non-image content-type). Remove or replace every broken URL (delete the `<img>` tag, swap for a real URL, or — if nothing real is available — ask the user) and re-run until it passes. The page does not ship with broken images. This is the URL-resolves check; the **Logo Verification name-check** and the **logo color-fit/visibility** rules still apply ON TOP of it (the script confirms a URL loads an image, not that the logo is the right company or visible against its background).
 
 ### Icons
 
@@ -603,7 +609,11 @@ No dead buttons. No `href="#"`. No `javascript:void(0)`. Every visible control p
 ### Save Flow
 
 1. Build the HTML file locally. QA it.
-2. **Image URL verification gate (HARD FAIL).** Before any user-facing checkpoint, verify every `<img src>` and every CSS `background-image: url(...)` in the page. **Verify by loading the URL as an actual image (`new Image()` / `<img>`, then `naturalWidth > 0`), NOT by fetching/downloading it and inspecting the content-type or "file type."** The image-load method is what the page actually does and always sends `Accept: image/*`, so it tests reality. A fetch/download/"check file type" step without `Accept: image/*` makes Brandfetch (and some CDNs) return an HTML page, reads `text/html`, and false-fails a perfectly valid logo — sending you to a needless Wikimedia fallback. **Do NOT run a "download the logo and check the file type" step against Brandfetch URLs.** If for some reason you use a fetch-based check, you MUST set `Accept: image/*` on it. A URL that genuinely fails the image-load (does not render, `naturalWidth === 0`, DNS failure, timeout, real 4xx/5xx) is broken — remove it (delete the `<img>` tag, replace with a real URL, or ask the user). Do not show the page to the user with broken images. This gate runs in addition to the Logo Verification name-check rules; both must pass.
+2. **Image URL verification gate (HARD FAIL).** Before any user-facing checkpoint, run the bundled script — do NOT hand-check URLs:
+   ```
+   python3 scripts/verify_images.py <path-to-your-page.html>
+   ```
+   It extracts every `<img src>`, `<source srcset>`, and CSS `background-image: url(...)` and checks each with the correct headers baked in (`Accept: image/*` + browser User-Agent), so Brandfetch (and similar CDNs) return the real image instead of an HTML fallback. This removes the manual-check failure mode where a "download the logo and check the file type" step without the right headers got `text/html` back and false-failed a perfectly valid logo, sending you to a needless Wikimedia fallback. Exit code 0 = all images load; any `FAIL` / non-zero exit = a broken URL (4xx/5xx, DNS failure, timeout, non-image content-type) — remove or replace it (delete the `<img>` tag, swap a real URL, or ask the user) and re-run until it passes. Do not show the page with broken images. This URL-resolves gate runs in addition to the Logo Verification name-check AND the logo color-fit/visibility rules — all must pass.
 3. **Present a short post-build status.** No section-by-section summary — the structure was already approved in the Structure Preview before build. Just a short status line + save popup. Write something like:
 
    > Done — page is in the preview panel. Take a look.
